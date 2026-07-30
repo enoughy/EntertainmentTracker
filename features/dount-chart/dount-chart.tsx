@@ -13,7 +13,7 @@ export function DountChart({ stat, name }: DountChartProps) {
     in_progress: "#FFC766",
     planning: "#9A99F4",
     completed: "#87D68D", // "#B3FFFC",
-    dropped: "#483C46", //"#373F51",
+    dropped: "#483C46", //"#373F51", #515053
   };
   return (
     <BaseCard className="w-[207px] h-[228px] rounded-[55px] pt-8">
