@@ -12,15 +12,17 @@ export function Header({ className }: HeaderProps) {
         (className ?? "")
       }
     >
-      <div className="flex items-center justify-between text-[#222F3E] text-[18px] font-medium">
-        <span className="w-[21px] h-[21px] bg-[#9A99F4] rounded-[8px] mr-2"></span>
+      <div className="flex items-center justify-between text-[#222F3E] text-[12px] font-medium">
+        <span className="w-[21px] h-[21px] bg-[#FF6787] rounded-[8px] mr-2"></span>
         <div className="mr-2.5">Любимое </div>
+        <span className="w-[21px] h-[21px] bg-[#87D68D] rounded-[8px] mr-2"></span>
+        <div className="mr-2.5">Посмотрено</div>
+        <span className="w-[21px] h-[21px] bg-[#FFC766] rounded-[8px] mr-2"></span>
+        <div className="mr-2.5">В процессе</div>
         <span className="w-[21px] h-[21px] bg-[#9A99F4] rounded-[8px] mr-2"></span>
-        <div className="mr-2.5">Любимое </div>
-        <span className="w-[21px] h-[21px] bg-[#9A99F4] rounded-[8px] mr-2"></span>
-        <div className="mr-2.5">Любимое </div>
-        <span className="w-[21px] h-[21px] bg-[#9A99F4] rounded-[8px] mr-2"></span>
-        <div>Любимое </div>
+        <div className="mr-2.5">Запланировано</div>
+        <span className="w-[21px] h-[21px] bg-[#483C46] rounded-[8px] mr-2"></span>
+        <div>Брошено</div>
       </div>
     </BaseCard>
   );
