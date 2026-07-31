@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BaseStatCard } from "@/features/base-stat-card/base-stat-card";
 import { DountChart } from "@/features/dount-chart/dount-chart";
 import { DountChartData } from "@/types/dount-chart-stat/dount-chart-stat";
+import { BarChartComp } from "@/features/bar-chart/bar-chart";
 
 const data: DountChartData = {
   data: [
@@ -24,6 +25,7 @@ export default function Home() {
         proc={-4.1}
       ></BaseStatCard>
       <DountChart stat={data} name="Фильмы"></DountChart>
+      <BarChartComp></BarChartComp>
     </>
   );
 }
