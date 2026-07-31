@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Nav from './components/navigation';
+import Nav from "./components/navigation";
 import "./globals.css";
+import backgroundImage from "../img/steve-a-johnson-jPT1hVOhqb0-unsplash.jpg";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,15 +29,19 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-row">
-        <Nav />
-        <main>
-          {children}
-        </main>
+      <body className="min-h-full flex justify-center items-center">
+        <div
+          className="z-0 absolute inset-0 bg-cover bg-center bg-fixed opacity-30"
+          style={{
+            backgroundImage: `url(${backgroundImage.src})`,
+          }}
+        />
+        <div className="z-10 w-[1440px] h-[95vh] mx-auto flex bg-[var(--background)] rounded-2xl overflow-hidden">
+          <Nav />
+          <main className="mx-auto">{children}</main>
 
-        <footer>
-
-        </footer>
+          <footer></footer>
+        </div>
       </body>
     </html>
   );

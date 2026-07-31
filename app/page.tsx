@@ -19,14 +19,29 @@ const arr = [data];
 export default function Home() {
   return (
     <>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={120}
-        countChange={5}
-        proc={-4.1}
-      ></BaseStatCard>
-      <DountChart stat={data} name="Фильмы"></DountChart>
-      <DountChartContainer data={arr}></DountChartContainer>
+      <div className="p-8">
+        <h1>Overview</h1>
+        <div className="grid grid-cols-3">
+          <BaseStatCard
+            name="Фильмы"
+            countAll={120}
+            countChange={5}
+            proc={-4.1}
+          ></BaseStatCard>
+          <BaseStatCard
+            name="Фильмы"
+            countAll={120}
+            countChange={5}
+            proc={-4.1}
+          ></BaseStatCard>
+          <BaseStatCard
+            name="Фильмы"
+            countAll={120}
+            countChange={5}
+            proc={-4.1}
+          ></BaseStatCard>
+        </div>
+      </div>
     </>
   );
 }
