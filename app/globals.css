@@ -25,3 +25,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: #29292c;
 }
+.card{
+  display: flex;
+  gap: 10px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+}
+.card:hover{
+  transform: scale(1.02);
+  text-shadow:
+  0 0 30px rgb(0, 238, 255),
+  0 0 35px rgb(0, 238, 255),
+  0 0 40px rgb(0, 238, 255);
+}
+.navigation{
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+.navigation>h2{
+  margin-left: 30px;
+}
