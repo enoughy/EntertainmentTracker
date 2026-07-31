@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BaseStatCard } from "@/features/base-stat-card/base-stat-card";
 import { DountChart } from "@/features/dount-chart/dount-chart";
 import { DountChartData } from "@/types/dount-chart-stat/dount-chart-stat";
-import { BarChartComp } from "@/features/bar-chart/bar-chart";
+import { DountChartContainer } from "@/features/dount-chart-container/dount-chart-container";
 
 const data: DountChartData = {
   data: [
@@ -14,6 +14,7 @@ const data: DountChartData = {
     { name: "in_progress", value: 70 },
   ],
 };
+const arr = [data];
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
         proc={-4.1}
       ></BaseStatCard>
       <DountChart stat={data} name="Фильмы"></DountChart>
-      <BarChartComp></BarChartComp>
+      <DountChartContainer data={arr}></DountChartContainer>
     </>
   );
 }
