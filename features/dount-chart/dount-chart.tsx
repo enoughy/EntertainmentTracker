@@ -16,8 +16,8 @@ export function DountChart({ stat, name }: DountChartProps) {
     dropped: "#483C46", //"#373F51",
   };
   return (
-    <BaseCard className="w-[207px] h-[228px] rounded-[55px] pt-8">
-      <h4 className="text-center text-[#222F3E] text-[26px] font-extrabold">
+    <BaseCard className="w-[207px] h-[228px] rounded-[55px] pt-7">
+      <h4 className="text-center text-[#222F3E] text-[26px] font-extrabold mb-2">
         {name}
       </h4>
       <div className="h-30">
