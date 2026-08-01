@@ -20,16 +20,18 @@ export function BaseStatCard({
   proc,
 }: BaseStatCardProps) {
   return (
-    <BaseCard className="flex w-80.5 h-37.5 m-3 pt-[38px] justify-between">
+    <BaseCard className="flex w-80.5 h-37.5 mr-3 pt-[38px] justify-between">
       <div>
         <div className="text-[#898989]  text-[17px]">{name}</div>
         {/* All count in topic text*/}
-        <div className="text-[28px] font-semibold leading-none mt-1.5">
+        <div className="text-[28px] font-semibold leading-none mt-1.5 text-text-main">
           {countAll}
         </div>
 
         {/* count that change of time*/}
-        <div className="text-[14px]">{"+" + countChange + " за месяц"}</div>
+        <div className="text-[14px] text-text-main">
+          {"+" + countChange + " за месяц"}
+        </div>
 
         {/* procent that change of time*/}
         <div className="text-[#898989] text-[14px] text-center relative">

@@ -11,6 +11,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /*Custom colors*/
+
+  --color-text-main: #29292c;
+  --color-text-gray: #898989;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,4 +56,3 @@ body {
 .navigation > h2 {
   margin-left: 30px;
 }
-
