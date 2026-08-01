@@ -19,6 +19,15 @@ const data: DountChartData = {
     { name: "in_progress", value: 70 },
   ],
 };
+
+function dountChartMapper(mb: MediaBlock): DountChartData {
+  const chartData: DountChartData = { data: [] };
+  for (let [k, v] of mb.contentStatusStatistic) {
+    chartData.data.push({ name: k, value: v });
+  }
+  return chartData;
+}
+
 const arr = [data];
 
 function BaseStatCardPlaceHolder() {

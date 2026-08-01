@@ -1,4 +1,5 @@
 import { shiftBuff } from "@/adictStruct/shiftBuffer";
+import { ContentStatus } from "../content-status/content-status";
 
 export type Rate = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export type ContentType = "anime" | "film" | "series" | "books";
@@ -7,7 +8,8 @@ export interface Media {
   name: string;
   genres: string[];
   rate: Rate;
-  dateOfAdd: Date;
+  contentStatus: ContentStatus;
+  dateOfAdd?: Date;
 }
 
 export interface Film extends Media {}
@@ -20,6 +22,7 @@ export interface MediaBlock {
   mediaList: Media[];
   count: number;
   countOfAddInMounth: number;
+  contentStatusStatistic: Map<ContentStatus, number>;
 }
 
 // object in bd
@@ -34,6 +37,7 @@ export class Content {
         mediaList: [],
         count: 0,
         countOfAddInMounth: 0,
+        contentStatusStatistic: new Map(),
       };
       this.content.set(type, newMb);
     }
@@ -41,6 +45,10 @@ export class Content {
     const currMb = this.content.get(type);
     currMb!.count++;
     currMb!.countOfAddInMounth++;
+    currMb!.contentStatusStatistic.set(
+      title.contentStatus,
+      (currMb!.contentStatusStatistic.get(title.contentStatus) ?? 0) + 1,
+    );
     currMb!.mediaList.push(title);
 
     this.addedRecently.push(title);
