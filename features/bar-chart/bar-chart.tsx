@@ -24,13 +24,13 @@ const colorStop = "#002CFF";
 
 export function BarChartComp() {
   return (
-    <BaseCard className="max-w-[326px] h-[317px] pt-10">
+    <BaseCard className="max-w-[326px] pt-8 pb-2">
       <div className="flex justify-between items-center">
-        <h4 className="text-[#29292C] text-[24px]">Добавлено</h4>
-        <span className="text-[#898989] text-[18px]">Jan - Jun</span>
+        <h4 className="text-[#29292C] text-[20px]">Добавлено</h4>
+        <span className="text-[#898989] text-[15px]">Jan - Jun</span>
       </div>
       <BarChart
-        className="mt-[35px] h-55 max-h-[202px]"
+        className="mt-[28px] h-48 "
         responsive
         data={data}
         margin={{
@@ -47,7 +47,7 @@ export function BarChartComp() {
           </linearGradient>
         </defs>
 
-        <CartesianGrid vertical={false} strokeDasharray="8 8" opacity={0.6} />
+        <CartesianGrid vertical={false} strokeDasharray="8 8" opacity={0.4} />
         <XAxis dataKey="mount" />
         <YAxis width="auto" />
         <Tooltip cursor={false} />
