@@ -51,4 +51,7 @@ export class Content {
   getAddedRecently(): Media[] {
     return this.addedRecently.getValues();
   }
+  getMediaBlocks(): MediaBlock[] {
+    return Array.from(this.content.values());
+  }
 }
