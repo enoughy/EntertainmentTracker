@@ -12,7 +12,7 @@ export function Header({ className }: HeaderProps) {
         (className ?? "")
       }
     >
-      <div className="flex items-center justify-between text-[#222F3E] text-[12px] font-medium">
+      <div className="flex flex-col lg:flex-row items-center justify-between text-[#222F3E] text-[12px] font-medium">
         <span className="w-[21px] h-[21px] bg-[#FF6787] rounded-[8px] mr-2"></span>
         <div className="mr-2.5">Любимое </div>
         <span className="w-[21px] h-[21px] bg-[#87D68D] rounded-[8px] mr-2"></span>

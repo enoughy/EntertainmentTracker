@@ -8,7 +8,7 @@ import Help from "./icons/help";
 
 export default function () {
   return (
-    <div className="bg-[#36393e] w-[332px] h-[100%] flex flex-col gap-[30px] justify-center font-sans text-[white] text-[22px] navigation">
+    <div className="bg-nav-bg lg:w-[332px] w-[200px] h-[100%] flex flex-col gap-[30px] justify-center font-sans text-nav-text text-[22px] navigation">
       <h2>Menu</h2>
       <Link href="/">
         <div className="card">
@@ -50,4 +50,3 @@ export default function () {
     </div>
   );
 }
-
