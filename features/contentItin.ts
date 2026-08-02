@@ -5,27 +5,28 @@ export function contentDataInit(): ContentData {
   const content: ContentData = {
     content: new Map(),
     addedRecently: new shiftBuff(),
+    countAddedInMonths: new Map(),
   };
   const anime: MediaBlock = {
     typeId: "anime",
     mediaList: [],
     count: 0,
     contentStatusStatistic: new Map(),
-    countOfAddInMounth: 0,
+    countAddedInMonths: new Map(),
   };
   const film: MediaBlock = {
     typeId: "film",
     mediaList: [],
     count: 0,
     contentStatusStatistic: new Map(),
-    countOfAddInMounth: 0,
+    countAddedInMonths: new Map(),
   };
   const series: MediaBlock = {
     typeId: "series",
     mediaList: [],
     count: 0,
     contentStatusStatistic: new Map(),
-    countOfAddInMounth: 0,
+    countAddedInMonths: new Map(),
   };
   content.content.set("anime", anime);
   content.content.set("series", series);
