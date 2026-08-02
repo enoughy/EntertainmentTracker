@@ -24,7 +24,7 @@ export function DountChart({ stat, name }: DountChartProps) {
         <ResponsiveContainer>
           <PieChart>
             <Pie
-              data={stat.data}
+              data={stat?.data ?? []}
               dataKey="value"
               cx="50%"
               cy="50%"

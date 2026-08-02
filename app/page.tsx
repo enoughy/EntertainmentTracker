@@ -11,18 +11,21 @@ import { Content, ContentData } from "@/types/entitys/media";
 import { MediaBlock } from "@/types/entitys/media";
 import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
 import { contentDataInit } from "@/features/contentItin";
+import { BarChartData } from "@/features/bar-chart/bar-chart";
+import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
+import { MONTHS_MAP } from "@/types/months/months";
 
-const data: DountChartData = {
-  data: [
-    { name: "favorite", value: 20 },
-    { name: "dropped", value: 10 },
-    { name: "completed", value: 20 },
-    { name: "planning", value: 70 },
-    { name: "in_progress", value: 70 },
-  ],
-};
-
-const arr = [data];
+// const data: DountChartData = {
+//   data: [
+//     { name: "favorite", value: 20 },
+//     { name: "dropped", value: 10 },
+//     { name: "completed", value: 20 },
+//     { name: "planning", value: 70 },
+//     { name: "in_progress", value: 70 },
+//   ],
+// };
+//
+// const arr = [data];
 
 function BaseStatCardPlaceHolder() {
   return (
@@ -48,10 +51,29 @@ function BaseStatCardPlaceHolder() {
     </>
   );
 }
+// const data: BarChartData = [
+//   { mount: "Jan", value: 40 },
+//   { mount: "Feb", value: 140 },
+//   { mount: "Mar", value: 30 },
+//   { mount: "Apr", value: 80 },
+//   { mount: "Jun", value: 40 },
+// ];
+
+function procCalculate(item: MediaBlock): number {
+  const currMonth = MONTHS_MAP.at(new Date().getMonth())!;
+  const prevMonth = MONTHS_MAP.at(new Date().getMonth() - 1)!;
+  const currVal = item.countAddedInMonths?.get(currMonth) ?? 0;
+  const prevVal = item.countAddedInMonths?.get(prevMonth) ?? 0;
+  const ret = ((currVal - prevVal) / prevVal) * 100;
+
+  return Number.isFinite(ret) ? ret : 0;
+}
+
 export default function Home() {
   const [content, setContent] = useState<Content | null>(null);
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
+  const [barChartData, setBarChartData] = useState<BarChartData>([]);
 
   useEffect(() => {
     localforage.getItem<ContentData>("content").then((data) => {
@@ -70,11 +92,12 @@ export default function Home() {
       setMediaBlockList(currMediaBlockList);
       console.log(currMediaBlockList);
       const dChData = currMediaBlockList.map((mb) => {
-        return dountChartMapper(mb);
+        return dountChartMapper(mb) ?? [];
       });
       console.log(dChData);
       setDountCahrData(dChData);
       setContent(newContent);
+      setBarChartData(barChartDataMapper(newContent));
     });
   }, []);
 
@@ -90,8 +113,12 @@ export default function Home() {
                   key={item.typeId}
                   name={item.typeId}
                   countAll={item.count}
-                  countChange={item.countOfAddInMounth}
-                  proc={4}
+                  countChange={
+                    item.countAddedInMonths?.get(
+                      MONTHS_MAP[new Date().getMonth()] ?? "January",
+                    ) ?? 0
+                  }
+                  proc={procCalculate(item)}
                 ></BaseStatCard>
               );
             })}
@@ -99,7 +126,7 @@ export default function Home() {
               <DountChartContainer data={dountChartData}></DountChartContainer>
             </div>
 
-            <BarChartComp></BarChartComp>
+            <BarChartComp data={barChartData}></BarChartComp>
           </Suspense>
         </div>
       </div>

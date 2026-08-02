@@ -10,24 +10,23 @@ import {
   Legend,
 } from "recharts";
 
-type BarChartData = { mount: string; value: number }[];
+export type BarChartData = { mount: string; value: number }[];
 
-const data: BarChartData = [
-  { mount: "Jan", value: 40 },
-  { mount: "Feb", value: 140 },
-  { mount: "Mar", value: 30 },
-  { mount: "Apr", value: 80 },
-  { mount: "Jun", value: 40 },
-];
+type BarChartProps = {
+  data: BarChartData;
+};
+
 const colorStart = "#5570F1";
 const colorStop = "#002CFF";
 
-export function BarChartComp() {
+export function BarChartComp({ data }: BarChartProps) {
   return (
     <BaseCard className="max-w-[326px] pt-8 pb-2">
       <div className="flex justify-between items-center">
         <h4 className="text-[#29292C] text-[20px]">Добавлено</h4>
-        <span className="text-[#898989] text-[15px]">Jan - Jun</span>
+        <span className="text-[#898989] text-[15px]">
+          {data[-1] === undefined ? "" : data[0].mount + " - " + data[-1].mount}
+        </span>
       </div>
       <BarChart
         className="mt-[28px] h-48 "
@@ -48,8 +47,8 @@ export function BarChartComp() {
         </defs>
 
         <CartesianGrid vertical={false} strokeDasharray="8 8" opacity={0.4} />
-        <XAxis dataKey="mount" />
-        <YAxis width="auto" />
+        <XAxis tick={{ fontSize: 12 }} interval={0} dataKey="mount" />
+        <YAxis tick={{ fontSize: 12 }} width="auto" />
         <Tooltip cursor={false} />
         <Bar
           dataKey="value"
