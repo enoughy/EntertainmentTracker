@@ -5,10 +5,12 @@ import { DountChart } from "@/features/dount-chart/dount-chart";
 import { DountChartData } from "@/types/dount-chart-stat/dount-chart-stat";
 import { DountChartContainer } from "@/features/dount-chart-container/dount-chart-container";
 import { BarChartComp } from "@/features/bar-chart/bar-chart";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import localforage from "localforage";
-import { Content } from "@/types/entitys/media";
+import { Content, ContentData } from "@/types/entitys/media";
 import { MediaBlock } from "@/types/entitys/media";
+import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
+import { contentDataInit } from "@/features/contentItin";
 
 const data: DountChartData = {
   data: [
@@ -19,14 +21,6 @@ const data: DountChartData = {
     { name: "in_progress", value: 70 },
   ],
 };
-
-function dountChartMapper(mb: MediaBlock): DountChartData {
-  const chartData: DountChartData = { data: [] };
-  for (let [k, v] of mb.contentStatusStatistic) {
-    chartData.data.push({ name: k, value: v });
-  }
-  return chartData;
-}
 
 const arr = [data];
 
@@ -56,12 +50,31 @@ function BaseStatCardPlaceHolder() {
 }
 export default function Home() {
   const [content, setContent] = useState<Content | null>(null);
-  let mediaBlockList: MediaBlock[] = [];
+  const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
+  const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
 
   useEffect(() => {
-    const content = localforage.getItem<Content>("content").then((data) => {
-      setContent(data);
-      mediaBlockList = data?.getMediaBlocks() ?? [];
+    localforage.getItem<ContentData>("content").then((data) => {
+      if (data === null) {
+        data = contentDataInit();
+        localforage
+          .setItem("content", data)
+          .then(() =>
+            console.log(
+              "Объект отсутствовал. Создан и сохранен новый профиль.",
+            ),
+          );
+      }
+      const newContent = new Content(data);
+      const currMediaBlockList = newContent.getMediaBlocks() ?? [];
+      setMediaBlockList(currMediaBlockList);
+      console.log(currMediaBlockList);
+      const dChData = currMediaBlockList.map((mb) => {
+        return dountChartMapper(mb);
+      });
+      console.log(dChData);
+      setDountCahrData(dChData);
+      setContent(newContent);
     });
   }, []);
 
@@ -70,23 +83,24 @@ export default function Home() {
       <div className="p-12 text-text-gray text-[28px]">
         <h1 className="mb-10 text">Статистика трекера</h1>
         <div className="grid grid-cols-1 justify-items-center second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
-          {mediaBlockList.length === 0 ? BaseStatCardPlaceHolder() : <></>}
+          <Suspense fallback={<></>}>
+            {mediaBlockList.map((item) => {
+              return (
+                <BaseStatCard
+                  key={item.typeId}
+                  name={item.typeId}
+                  countAll={item.count}
+                  countChange={item.countOfAddInMounth}
+                  proc={4}
+                ></BaseStatCard>
+              );
+            })}
+            <div className="col-span-1 second:col-span-2 first:col-span-2">
+              <DountChartContainer data={dountChartData}></DountChartContainer>
+            </div>
 
-          {mediaBlockList.map((item) => {
-            return (
-              <BaseStatCard
-                name={item.typeId}
-                countAll={item.count}
-                countChange={item.countOfAddInMounth}
-                proc={4}
-              ></BaseStatCard>
-            );
-          })}
-          <div className="col-span-1 second:col-span-2 first:col-span-2">
-            <DountChartContainer data={arr}></DountChartContainer>
-          </div>
-
-          <BarChartComp></BarChartComp>
+            <BarChartComp></BarChartComp>
+          </Suspense>
         </div>
       </div>
     </>

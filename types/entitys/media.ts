@@ -25,10 +25,20 @@ export interface MediaBlock {
   contentStatusStatistic: Map<ContentStatus, number>;
 }
 
+export interface ContentData {
+  content: Map<ContentType, MediaBlock>;
+  addedRecently: shiftBuff<Media>;
+}
+
 // object in bd
-export class Content {
-  content: Map<ContentType, MediaBlock> = new Map<ContentType, MediaBlock>();
-  private addedRecently: shiftBuff<Media> = new shiftBuff<Media>();
+export class Content implements ContentData {
+  content: Map<ContentType, MediaBlock>;
+  addedRecently: shiftBuff<Media>;
+
+  constructor(data: ContentData) {
+    this.content = data.content;
+    this.addedRecently = data.addedRecently;
+  }
 
   add(title: Media, type: ContentType) {
     if (!this.content.has(type)) {
