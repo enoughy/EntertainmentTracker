@@ -1,5 +1,6 @@
 import { shiftBuff } from "@/adictStruct/shiftBuffer";
-import { Anime, Content, ContentData, MediaBlock } from "@/types/entitys/media";
+import { ContentData } from "./content/entity/ContentData";
+import { MediaBlock } from "./content/entity/mediaBlock";
 
 export function contentDataInit(): ContentData {
   const content: ContentData = {

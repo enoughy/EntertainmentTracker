@@ -11,9 +11,9 @@ export function DountChartContainer({ data }: DountChartContainerProps) {
     <div className="max-w-[656px]">
       <Header className="mb-5"></Header>
       <div className="flex flex-col sm:flex-row items-center justify-between">
-        <DountChart name="Фильмы" stat={data[0]}></DountChart>
-        <DountChart name="Фильмы" stat={data[0]}></DountChart>
-        <DountChart name="Фильмы" stat={data[0]}></DountChart>
+        <DountChart name="Аниме" stat={data[0]}></DountChart>
+        <DountChart name="Сериалы" stat={data[1]}></DountChart>
+        <DountChart name="Фильмы" stat={data[2]}></DountChart>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import { Content } from "@/types/entitys/media";
+import { ContentData } from "../content/entity/ContentData";
 import { BarChartData } from "./bar-chart";
-import { MONTHS_MAP } from "@/types/months/months";
+import { MONTHS_MAP } from "@/types/date/months";
 
-export function barChartDataMapper(content: Content): BarChartData {
+export function barChartDataMapper(content: ContentData): BarChartData {
   const systemMonthIndex: number = new Date().getMonth();
   const result: BarChartData = [];
   for (let i = systemMonthIndex - 5; i <= systemMonthIndex; i++) {
