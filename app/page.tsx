@@ -1,19 +1,16 @@
 "use client";
-import Image from "next/image";
 import { BaseStatCard } from "@/features/base-stat-card/base-stat-card";
-import { DountChart } from "@/features/dount-chart/dount-chart";
 import { DountChartData } from "@/types/dount-chart-stat/dount-chart-stat";
 import { DountChartContainer } from "@/features/dount-chart-container/dount-chart-container";
 import { BarChartComp } from "@/features/bar-chart/bar-chart";
-import { Suspense, useEffect, useState } from "react";
-import localforage from "localforage";
-import { Content, ContentData } from "@/types/entitys/media";
-import { MediaBlock } from "@/types/entitys/media";
-import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
-import { contentDataInit } from "@/features/contentItin";
+import { Suspense, use, useEffect, useState } from "react";
 import { BarChartData } from "@/features/bar-chart/bar-chart";
+import { MONTHS_MAP } from "@/types/date/months";
+import { useContent } from "@/features/content/hooks/useContent";
+import { Media } from "@/features/content/entity/media";
+import { MediaBlock } from "@/features/content/entity/mediaBlock";
 import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
-import { MONTHS_MAP } from "@/types/months/months";
+import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
 
 // const data: DountChartData = {
 //   data: [
@@ -70,36 +67,50 @@ function procCalculate(item: MediaBlock): number {
 }
 
 export default function Home() {
-  const [content, setContent] = useState<Content | null>(null);
+  //const [content, setContent] = useState<Content | null>(null);
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
   const [barChartData, setBarChartData] = useState<BarChartData>([]);
+  const { content, addMedia, getMediaBlocks } = useContent();
 
   useEffect(() => {
-    localforage.getItem<ContentData>("content").then((data) => {
-      if (data === null) {
-        data = contentDataInit();
-        localforage
-          .setItem("content", data)
-          .then(() =>
-            console.log(
-              "Объект отсутствовал. Создан и сохранен новый профиль.",
-            ),
-          );
-      }
-      const newContent = new Content(data);
-      const currMediaBlockList = newContent.getMediaBlocks() ?? [];
-      setMediaBlockList(currMediaBlockList);
-      console.log(currMediaBlockList);
-      const dChData = currMediaBlockList.map((mb) => {
-        return dountChartMapper(mb) ?? [];
-      });
-      console.log(dChData);
-      setDountCahrData(dChData);
-      setContent(newContent);
-      setBarChartData(barChartDataMapper(newContent));
+    const currMediaBlockList = getMediaBlocks() ?? [];
+    setMediaBlockList(currMediaBlockList);
+    const dChData = currMediaBlockList.map((mb) => {
+      return dountChartMapper(mb) ?? [];
     });
-  }, []);
+    console.log("dChData");
+    console.log(dChData);
+    setDountCahrData(dChData);
+    setBarChartData(barChartDataMapper(content!));
+  }, [content]);
+  //     setMediaBlockList(currMediaBlockList);
+
+  // useEffect(() => {
+  //   localforage.getItem<ContentData>("content").then((data) => {
+  //     if (data === null) {
+  //       data = contentDataInit();
+  //       localforage
+  //         .setItem("content", data)
+  //         .then(() =>
+  //           console.log(
+  //             "Объект отсутствовал. Создан и сохранен новый профиль.",
+  //           ),
+  //         );
+  //     }
+  //     const newContent = new Content(data);
+  //     const currMediaBlockList = newContent.getMediaBlocks() ?? [];
+  //     setMediaBlockList(currMediaBlockList);
+  //     console.log(currMediaBlockList);
+  //     const dChData = currMediaBlockList.map((mb) => {
+  //       return dountChartMapper(mb) ?? [];
+  //     });
+  //     console.log(dChData);
+  //     setDountCahrData(dChData);
+  //     setContent(newContent);
+  //     setBarChartData(barChartDataMapper(newContent));
+  //   });
+  // }, []);
 
   return (
     <>
