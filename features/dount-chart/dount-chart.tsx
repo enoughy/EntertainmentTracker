@@ -21,23 +21,29 @@ export function DountChart({ stat, name }: DountChartProps) {
         {name}
       </h4>
       <div className="h-30">
-        <ResponsiveContainer>
-          <PieChart>
-            <Pie
-              data={stat?.data ?? []}
-              dataKey="value"
-              cx="50%"
-              cy="50%"
-              outerRadius={60}
-              innerRadius={30}
-              labelLine={false}
-              stroke="none"
-              shape={(props) => (
-                <Sector {...props} fill={STATUS_COLORS[props.name ?? ""]} />
-              )}
-            />
-          </PieChart>
-        </ResponsiveContainer>
+        {stat?.data.length === 0 ? (
+          <div className="h-full flex justify-center items-center">
+            Данных нет
+          </div>
+        ) : (
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={stat?.data ?? []}
+                dataKey="value"
+                cx="50%"
+                cy="50%"
+                outerRadius={60}
+                innerRadius={30}
+                labelLine={false}
+                stroke="none"
+                shape={(props) => (
+                  <Sector {...props} fill={STATUS_COLORS[props.name ?? ""]} />
+                )}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        )}
       </div>
     </BaseCard>
   );
