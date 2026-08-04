@@ -6,6 +6,7 @@ import X from '@/app/components/icons/x';
 import { setDataStartEndIndexes } from "recharts/types/state/chartDataSlice";
 import { useContent } from '@/features/content/hooks/useContent';
 import { Media } from "@/features/content/entity/media";
+import Plus from '@/app/components/icons/plus';
 
 export default function Movie(){
     const [ isOpen, setIsOpen ] = useState(false);
@@ -71,7 +72,7 @@ export default function Movie(){
         <>
         <div className="flex justify-center items-center mb-[50px] mt-[30px] pageInfo">
             <h2 className="mr-[30px]">Мои фильмы</h2>
-            <button onClick={() => setIsOpen(true)} className="bg-[lightgray] p-[5px] rounded-[7px] border 2border-[gray] cursor-pointer addMovie">Добавить</button>
+            <button onClick={() => setIsOpen(true)} className="bg-[rgba(211,211,211,0.5)] p-[4px] rounded-[7px] border border-[gray] cursor-pointer addMovie flex items-center gap-[3px]"><Plus />Добавить</button>
         </div>
 
         <Modal isOpen={isOpen}>
