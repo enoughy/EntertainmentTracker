@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f4f5fa;
+
   --foreground: #171717;
 }
 
@@ -10,6 +11,16 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --breakpoint-first: 67rem; /* ~1072px (Средний экран) */
+  --breakpoint-second: 90rem; /* ~1440px (Большой экран) */
+  /*Custom colors*/
+
+  --color-text-main: #29292c;
+  --color-text-gray: #898989;
+
+  --color-nav-bg: #36393e;
+  --color-nav-text: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,9 +33,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  color: #29292c;
+  /* font-family: "Manrope", sans-serif; */
+  /* font-family: "Inter", sans-serif; */
+  /* font-optical-sizing: auto; */
 }
-.card{
+.card {
   display: flex;
   gap: 10px;
   transition: 0.3s ease;
@@ -33,17 +48,17 @@ body {
   display: flex;
   align-items: center;
 }
-.card:hover{
+.card:hover {
   transform: scale(1.02);
   text-shadow:
-  0 0 30px rgb(0, 238, 255),
-  0 0 35px rgb(0, 238, 255),
-  0 0 40px rgb(0, 238, 255);
+    0 0 30px rgb(0, 238, 255),
+    0 0 35px rgb(0, 238, 255),
+    0 0 40px rgb(0, 238, 255);
 }
-.navigation{
-  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+.navigation {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
-.navigation>h2{
+.navigation > h2 {
   margin-left: 30px;
 }
 .closeBtn{
@@ -86,7 +101,7 @@ body {
 }
 .movies{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 95%;
 }
 main{
@@ -106,4 +121,18 @@ main{
 .pageInfo, .cardMovie{
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
   font-size: 18px;
+}
+.selectOption{
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+.selectOption:valid{
+  border: 1px solid black;
+}
+.noneText{
+  position: absolute;
+  left: 52%;
 }
