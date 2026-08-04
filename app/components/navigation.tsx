@@ -8,43 +8,43 @@ import Help from "./icons/help";
 
 export default function () {
   return (
-    <div className="bg-nav-bg lg:w-[332px] w-[200px] h-[100%] flex flex-col gap-[30px] justify-center font-sans text-nav-text text-[22px] navigation">
-      <h2>Menu</h2>
+    <div className="bg-nav-bg lg:w-[332px] w-[200px] h-[100%] flex flex-col shrink-0 gap-[30px] justify-center font-sans text-nav-text text-[22px] navigation">
+      <h2>Меню</h2>
       <Link href="/">
         <div className="card">
           <Chart />
-          Overview
+          Статистика
         </div>
       </Link>
       <Link href="/Movie">
         <div className="card">
           <Film />
-          Movie
+          Фильмы
         </div>
       </Link>
       <Link href="/Series">
         <div className="card">
           <Series />
-          Series
+          Сериалы
         </div>
       </Link>
       <Link href="/Anime">
         <div className="card">
           <Anime />
-          Anime
+          Аниме
         </div>
       </Link>
-      <h2>Other</h2>
+      <h2>Другое</h2>
       <Link href="/Settings">
         <div className="card">
           <Settings />
-          Settings
+          Настройки
         </div>
       </Link>
       <Link href="/Help">
         <div className="card">
           <Help />
-          Contacts
+          Контакты
         </div>
       </Link>
     </div>

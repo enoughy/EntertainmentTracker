@@ -61,13 +61,15 @@ export function useContent() {
   };
 
   /*if this funciton will use before init component => they may droped*/
-  const addMedia = (title: Media) => {
+  const addMedia = async (title: Media) => {
     if (content === null || content === undefined) {
       console.log("content is null || undef");
       return;
     }
     const newContent = service.add(title, content);
-    setContent((newContent) => newContent);
+    setContent(newContent);
+
+    await bd.storeContent(newContent);
   };
 
   const getByType = (type: ContentType) => {
@@ -95,13 +97,15 @@ export function useContent() {
   };
 
   useEffect(() => {
-    load().then((content) => {
-      if (content === null) {
-        content = contentDataInit();
-        bd.storeContent(content!);
+    load().then((loadedContent) => {
+      if (loadedContent === null) {
+        let newContent = contentDataInit();
+        newContent = service.addMediaList(medias, newContent);
+        bd.storeContent(newContent);
+        setContent(newContent);
+      } else {
+        setContent(loadedContent);
       }
-      console.log(content);
-      setContent(service.addMediaList(medias, content));
     });
   }, []);
   return { content, addMedia, getByType, getMediaBlocks, getAddedRecently };

@@ -35,7 +35,7 @@ export function BaseStatCard({
 
         {/* procent that change of time*/}
         <div className="text-[#898989] text-[14px] text-center relative">
-          {proc > 0 ? (
+          {proc >= 0 ? (
             <ArrowUp className="mb-0.5 mr-0.5"></ArrowUp>
           ) : (
             <ArrowDown className="mb-0.5 mr-0.5"></ArrowDown>
@@ -48,7 +48,7 @@ export function BaseStatCard({
       </div>
 
       <div className="flex items-center justify-center">
-        {proc > 0 ? <PlotUp></PlotUp> : <PlotDown></PlotDown>}
+        {proc >= 0 ? <PlotUp></PlotUp> : <PlotDown></PlotDown>}
       </div>
     </BaseCard>
   );
