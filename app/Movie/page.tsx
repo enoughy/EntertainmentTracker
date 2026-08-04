@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Modal } from "@/app/components/modal";
 import X from "@/app/components/icons/x";
 import { setDataStartEndIndexes } from "recharts/types/state/chartDataSlice";
+import { ModalMediaEditor } from "../features/modal-media-editor";
 import { useContent } from "@/features/content/hooks/useContent";
 import { Media } from "@/features/content/entity/media";
 import Plus from "@/app/components/icons/plus";
@@ -84,79 +85,11 @@ export default function Movie() {
         </button>
       </div>
 
-      <Modal isOpen={isOpen}>
-        <div className="flex justify-end">
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              setTitle("");
-              setGenre("");
-              setRating("");
-            }}
-            className="cursor-pointer closeBtn"
-          >
-            <X />
-          </button>
-        </div>
-        <div className="inputContainer">
-          <label>Название: </label>
-          <input
-            type="text"
-            placeholder="Название..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <br />
-          <label>Жанр: </label>
-          <input
-            type="text"
-            placeholder="экшен..."
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          />
-          <br />
-          <label>Ваша оценка от 1 до 10: </label>
-          <input
-            type="number"
-            placeholder="9"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            required
-          />
-          <label>Статус: </label>
-          <select
-            className="selectOption"
-            onChange={(e) => setStatus(e.target.value)}
-            value={status}
-          >
-            <option value="favorite" className="text-[#ff6787]">
-              Любимое
-            </option>
-            <option value="completed" className="text-[#87d68d]">
-              Просмотрено
-            </option>
-            <option value="in_progress" className="text-[#ffc766]">
-              В процессе
-            </option>
-            <option value="planning" className="text-[#9a99f4]">
-              Запланировано
-            </option>
-            <option value="dropped" className="text-[#483c46]">
-              Брошено
-            </option>
-          </select>
-        </div>
-        <div className="flex justify-center">
-          <button
-            className="cursor-pointer bg-[lightgray] p-[7px] rounded-[10px] border 2border-[gray] addBtn"
-            onClick={addMovie}
-          >
-            Добавить
-          </button>
-        </div>
-      </Modal>
+      <ModalMediaEditor
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        addMedia={addMovie}
+      ></ModalMediaEditor>
 
       <div className="flex justify-center">
         <div className="gap-[20px] movies">
