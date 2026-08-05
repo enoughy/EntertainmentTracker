@@ -5,6 +5,7 @@ import { ContentType } from "@/types/content-type/contentType";
 export interface Media {
   name: string;
   genres: string[];
+  imgFile?: File;
   rate: Rate;
   contentType: ContentType;
   contentStatus: ContentStatus;
