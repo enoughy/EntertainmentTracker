@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f5fa;
+  --background: #fcfbfc;
+  /* #f4f5fa; */
 
   --foreground: #171717;
 }
@@ -20,8 +21,8 @@
   --color-text-main: #29292c;
   --color-text-gray: #898989;
 
-  --color-nav-bg: #36393e;
-  --color-nav-text: #fff;
+  --color-nav-bg: #fff;
+  --color-nav-text: #898989;
 
   /* --color-card-bg: #36393e; */
   /* --color-card-text: #fff; */
@@ -69,12 +70,6 @@ body {
     0 0 30px rgb(0, 238, 255),
     0 0 35px rgb(0, 238, 255),
     0 0 40px rgb(0, 238, 255);
-}
-.navigation {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
-}
-.navigation > h2 {
-  margin-left: 30px;
 }
 .closeBtn {
   clip-path: circle(50%);

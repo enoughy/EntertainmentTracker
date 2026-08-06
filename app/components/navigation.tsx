@@ -8,44 +8,68 @@ import Help from "./icons/help";
 
 export default function () {
   return (
-    <div className="bg-nav-bg lg:w-[332px] w-[200px] h-[100%] flex flex-col shrink-0 gap-[30px] justify-center font-sans text-nav-text text-[22px] navigation">
-      <h2>Меню</h2>
-      <Link href="/">
-        <div className="card">
-          <Chart />
-          Статистика
+    <div className="shadow-[inset_-6px_0_6px_-6px_rgba(0,0,0,0.04)] bg-gradient-to-b from-[#f5f7f9] to-[#eceef2] backdrop-blur-2xl border border-black/[0.04] rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] lg:w-[332px] w-[200px] h-full flex flex-col shrink-0 px-4 py-6">
+      <div className="flex items-center gap-3 px-3 mb-16">
+        <div className="size-10 rounded-xl bg-white/60" />
+        <div>
+          <div className="text-[15px] font-semibold">Cinema</div>
+          <div className="text-[12px] text-zinc-500">Dashboard</div>
         </div>
+      </div>
+      <h2 className="px-3 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500">
+        Меню
+      </h2>
+      <Link
+        href="/"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+      >
+        <Chart />
+        <span>Статистика</span>
       </Link>
-      <Link href="/Movie">
-        <div className="card">
-          <Film />
-          Фильмы
-        </div>
+
+      <Link
+        href="/Movie"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+      >
+        <Film />
+        <span>Фильмы</span>
       </Link>
-      <Link href="/Series">
-        <div className="card">
-          <Series />
-          Сериалы
-        </div>
+
+      <Link
+        href="/Series"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+      >
+        <Series />
+        <span>Сериалы</span>
       </Link>
-      <Link href="/Anime">
-        <div className="card">
-          <Anime />
-          Аниме
-        </div>
+
+      <Link
+        href="/Anime"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+      >
+        <Anime />
+        <span>Аниме</span>
       </Link>
-      <h2>Другое</h2>
-      <Link href="/Settings">
-        <div className="card">
-          <Settings />
-          Настройки
-        </div>
+
+      <div className="h-px bg-black/5 my-4" />
+      <h2 className="px-3 mt-6 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500">
+        Другое
+      </h2>
+
+      <Link
+        href="/Settings"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+      >
+        <Settings />
+        <span>Настройки</span>
       </Link>
-      <Link href="/Help">
-        <div className="card">
-          <Help />
-          Контакты
-        </div>
+
+      <Link
+        href="/Help"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+      >
+        <Help />
+        <span>Контакты</span>
       </Link>
     </div>
   );

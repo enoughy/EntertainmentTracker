@@ -1,7 +1,5 @@
-import { Settings } from 'lucide-react'
+import { Settings } from "lucide-react";
 
-export default function(){
-    return(
-        <Settings size={24} color="rgba(255, 255, 255, 0.7)" />
-    )
+export default function () {
+  return <Settings size={24} className="text-nav-text" />;
 }
