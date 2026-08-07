@@ -27,11 +27,11 @@ export function MediaCard({ title }: MediaCardProps) {
   }
 
   return (
-    <div className="">
+    <div className="border border-[rgba(0,0,0,0.3)] bg-black/[0.05] p-[15px] rounded-[24px] mediaCard">
       <div className="relative w-full  aspect-2/3 overflow-hidden rounded-2xl ">
         {imgUrl !== "" ? (
           <img
-            className=" rounded-2xl w-full h-full object-cover hover:scale-105 transition-transform duration-400"
+            className="rounded-2xl w-full h-full object-cover hover:scale-105 transition-transform duration-400"
             src={imgUrl}
           ></img>
         ) : (
