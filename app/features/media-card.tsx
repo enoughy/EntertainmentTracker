@@ -4,7 +4,8 @@ import { ContentStatus } from "@/types/content-status/content-status";
 import { Star } from "lucide-react";
 
 type MediaCardProps = {
-  title: Media;
+  title: Media,
+  onClick?: () => void,
 };
 const options: Intl.DateTimeFormatOptions = {
   day: "2-digit",
@@ -20,14 +21,14 @@ const TYPE_NAME: Record<ContentStatus, string> = {
   planning: "В планах",
 };
 
-export function MediaCard({ title }: MediaCardProps) {
+export function MediaCard({ title, onClick }: MediaCardProps) {
   let imgUrl = "";
   if (title.imgFile != null) {
     imgUrl = URL.createObjectURL(title.imgFile);
   }
 
   return (
-    <div className="border border-[rgba(0,0,0,0.3)] bg-black/[0.05] p-[15px] rounded-[24px] mediaCard">
+    <div className="border border-[rgba(0,0,0,0.3)] bg-black/[0.05] p-[15px] rounded-[24px] mediaCard" onClick={onClick}>
       <div className="relative w-full  aspect-2/3 overflow-hidden rounded-2xl ">
         {imgUrl !== "" ? (
           <img

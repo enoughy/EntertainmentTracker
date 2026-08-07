@@ -10,11 +10,14 @@ import { Media } from "@/features/content/entity/media";
 import Plus from "@/app/components/icons/plus";
 import { ContentStatus } from "@/types/content-status/content-status";
 import { MediaCard } from "../features/media-card";
+import ModalMediaViewer from '../features/modal-card-info';
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
   const { content, getMediaBlocks, addMedia } = useContent();
   const [anime, setAnime] = useState<Media[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Media | null>(null)
+  const [isOpenCard, setIsOpenCard] = useState(false);
 
   useEffect(() => {
     if (content) {
@@ -37,6 +40,19 @@ export default function Movie() {
     }
   }, [content, getMediaBlocks]);
 
+  const cardClick = (movie: Media) => {
+    setSelectedMovie(movie);
+    setIsOpenCard(true);
+  }
+
+  const handleUpdateMovie = (updatedMovie: Media) => {
+    setAnime(prevMovies => 
+      prevMovies.map(movie => 
+        movie === selectedMovie ? updatedMovie : movie
+      )
+    );
+  }
+
   return (
     <>
       <div className="flex justify-center items-center mb-[50px] mt-[30px] pageInfo">
@@ -56,13 +72,20 @@ export default function Movie() {
         addMedia={addMedia}
       ></ModalMediaEditor>
 
+      <ModalMediaViewer 
+        isOpenCard={isOpenCard} 
+        setIsOpenCard={setIsOpenCard} 
+        movie={selectedMovie}
+        onUpdate={handleUpdateMovie}
+      ></ModalMediaViewer>
+
       <div className="">
         <div className="gap-[20px] grid grid-cols-5 p-4">
           {anime.length === 0 ? (
             <p className="noneText">Аниме пока нет</p>
           ) : (
             anime.map((movie, index) => (
-              <MediaCard key={index} title={movie}></MediaCard>
+              <MediaCard key={index} title={movie} onClick={() => cardClick(movie)}></MediaCard>
             ))
           )}
         </div>
