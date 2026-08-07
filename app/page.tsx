@@ -11,31 +11,7 @@ import { Media } from "@/features/content/entity/media";
 import { MediaBlock } from "@/features/content/entity/mediaBlock";
 import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
 import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
-
-function BaseStatCardPlaceHolder() {
-  return (
-    <>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={0}
-        proc={0}
-        countChange={0}
-      ></BaseStatCard>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={0}
-        proc={0}
-        countChange={0}
-      ></BaseStatCard>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={0}
-        proc={0}
-        countChange={0}
-      ></BaseStatCard>
-    </>
-  );
-}
+import { AddedRecently } from "@/features/added-recetnly/added-recently";
 
 function procCalculate(item: MediaBlock): number {
   const currMonth = MONTHS_MAP.at(new Date().getMonth())!;
@@ -51,7 +27,7 @@ export default function Home() {
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
   const [barChartData, setBarChartData] = useState<BarChartData>([]);
-  const { content, addMedia, getMediaBlocks } = useContent();
+  const { content, getMediaBlocks } = useContent();
 
   useEffect(() => {
     const currMediaBlockList = getMediaBlocks() ?? [];
@@ -64,6 +40,7 @@ export default function Home() {
     setDountCahrData(dChData);
     setBarChartData(barChartDataMapper(content!));
   }, [content]);
+
   return (
     <>
       <div className="p-12 text-text-gray text-[28px]">
@@ -91,6 +68,10 @@ export default function Home() {
 
             <BarChartComp data={barChartData}></BarChartComp>
           </Suspense>
+
+          <div className="col-span-3">
+            <AddedRecently></AddedRecently>
+          </div>
         </div>
       </div>
     </>
