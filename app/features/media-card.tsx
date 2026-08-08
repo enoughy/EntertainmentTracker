@@ -4,8 +4,8 @@ import { ContentStatus } from "@/types/content-status/content-status";
 import { Star } from "lucide-react";
 
 type MediaCardProps = {
-  title: Media,
-  onClick?: () => void,
+  title: Media;
+  onClick?: (e: any) => void;
 };
 const options: Intl.DateTimeFormatOptions = {
   day: "2-digit",
@@ -28,7 +28,10 @@ export function MediaCard({ title, onClick }: MediaCardProps) {
   }
 
   return (
-    <div className="border border-[rgba(0,0,0,0.3)] bg-black/[0.05] p-[15px] rounded-[24px] mediaCard" onClick={onClick}>
+    <div
+      className="border border-[rgba(0,0,0,0.3)] bg-black/[0.05] p-[15px] rounded-[24px] mediaCard"
+      onClick={onClick}
+    >
       <div className="relative w-full  aspect-2/3 overflow-hidden rounded-2xl ">
         {imgUrl !== "" ? (
           <img
