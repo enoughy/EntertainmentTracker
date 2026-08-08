@@ -2,27 +2,27 @@ import { shiftBuff } from "@/adictStruct/shiftBuffer";
 import { ContentStatus } from "../content-status/content-status";
 import { Months, MONTHS_MAP } from "../date/months";
 
-export interface Media {
-  name: string;
-  genres: string[];
-  rate: Rate;
-  contentStatus: ContentStatus;
-  dateOfAdd: Date;
-}
-
-export interface Film extends Media {}
-export interface Anime extends Media {}
-export interface Siries extends Media {}
-
-export interface MediaBlock {
-  readonly typeId: ContentType;
-  mediaList: Media[];
-  count: number;
-  countAddedInMonths: Map<Months, number>;
-  contentStatusStatistic: Map<ContentStatus, number>;
-}
-
-// export interface ContentData {
+// export interface Media {
+//   name: string;
+//   genres: string[];
+//   rate: Rate;
+//   contentStatus: ContentStatus;
+//   dateOfAdd: Date;
+// }
+//
+// export interface Film extends Media {}
+// export interface Anime extends Media {}
+// export interface Siries extends Media {}
+//
+// export interface MediaBlock {
+//   readonly typeId: ContentType;
+//   mediaList: Media[];
+//   count: number;
+//   countAddedInMonths: Map<Months, number>;
+//   contentStatusStatistic: Map<ContentStatus, number>;
+// }
+//
+// // export interface ContentData {
 //   content: Map<ContentType, MediaBlock>;
 //   addedRecently: shiftBuff<Media>;
 //   countAddedInMonths: Map<Months, number>;

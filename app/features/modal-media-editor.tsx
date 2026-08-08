@@ -7,16 +7,19 @@ import { MouseEventHandler, useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Media } from "@/features/content/entity/media";
 import { Download } from "@/img/download/download";
+import { ContentType } from "@/types/content-type/contentType";
 type ModalMediaEditorProps = {
   isOpen: boolean;
   setIsOpen: Function;
   addMedia: Function;
+  type: ContentType;
 };
 
 export function ModalMediaEditor({
   isOpen,
   setIsOpen,
   addMedia,
+  type,
 }: ModalMediaEditorProps) {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
@@ -47,7 +50,7 @@ export function ModalMediaEditor({
       name: title,
       genres: genre.split(",").map((g) => g.trim()),
       rate: numRating as Rate,
-      contentType: "anime",
+      contentType: type,
       contentStatus: status,
       dateOfAdd: new Date(),
       imgFile: coverImg,

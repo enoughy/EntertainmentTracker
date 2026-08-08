@@ -51,10 +51,10 @@ export default function Home() {
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
   const [barChartData, setBarChartData] = useState<BarChartData>([]);
-  const { content, addMedia, getMediaBlocks } = useContent();
+  const { content, addMedia, mediaBlocks, getMediaBlocks } = useContent();
 
   useEffect(() => {
-    const currMediaBlockList = getMediaBlocks() ?? [];
+    const currMediaBlockList = mediaBlocks ?? [];
     setMediaBlockList(currMediaBlockList);
     const dChData = currMediaBlockList.map((mb) => {
       return dountChartMapper(mb) ?? [];
@@ -63,7 +63,7 @@ export default function Home() {
     console.log(dChData);
     setDountCahrData(dChData);
     setBarChartData(barChartDataMapper(content!));
-  }, [content]);
+  }, [mediaBlocks]);
   return (
     <>
       <div className="p-12 text-text-gray text-[28px]">

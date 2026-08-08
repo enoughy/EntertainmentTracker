@@ -13,12 +13,11 @@ import { MediaCard } from "../features/media-card";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
-  const { content, getMediaBlocks, addMedia } = useContent();
+  const { content, mediaBlocks, getMediaBlocks, addMedia } = useContent();
   const [anime, setAnime] = useState<Media[]>([]);
 
   useEffect(() => {
-    if (content) {
-      const mediaBlocks = getMediaBlocks?.();
+    if (content || mediaBlocks) {
       if (mediaBlocks) {
         const allMedia: Media[] = [];
         Object.values(mediaBlocks).forEach((block) => {
@@ -30,12 +29,10 @@ export default function Movie() {
           (item) => item.contentType === "anime",
         );
 
-        if (filteredAnime.length !== anime.length) {
-          setAnime(filteredAnime);
-        }
+        setAnime(filteredAnime);
       }
     }
-  }, [content, getMediaBlocks]);
+  }, [mediaBlocks]);
 
   return (
     <>
@@ -54,6 +51,7 @@ export default function Movie() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         addMedia={addMedia}
+        type={"anime"}
       ></ModalMediaEditor>
 
       <div className="">

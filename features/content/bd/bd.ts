@@ -1,10 +1,33 @@
+// import { ContentData } from "../entity/ContentData";
+// import localforage from "localforage";
+//
+// export function getContent(): Promise<ContentData | null> {
+//   return localforage.getItem<ContentData>("content");
+// }
+//
+// export function storeContent(content: ContentData) {
+//   localforage.setItem("content", content);
+// }
+
+import Dexie, { Table } from "dexie";
+import { Media } from "../entity/media";
+import { MediaBlock, MediaBlockRecord } from "../entity/mediaBlock";
 import { ContentData } from "../entity/ContentData";
-import localforage from "localforage";
 
-export function getContent(): Promise<ContentData | null> {
-  return localforage.getItem<ContentData>("content");
+export class AppDB extends Dexie {
+  media!: Table<Media>;
+  mediaBlock!: Table<MediaBlockRecord>;
+  content!: Table<ContentData>;
+
+  constructor() {
+    super("AppDB");
+
+    this.version(1).stores({
+      media: "++id",
+      mediaBlock: "++id, typeId",
+      content: "id",
+    });
+  }
 }
 
-export function storeContent(content: ContentData) {
-  localforage.setItem("content", content);
-}
+export const db = new AppDB();
