@@ -65,7 +65,9 @@ export function useContent() {
   };
 
   const changeMedia = async (id: number, title: Media) => {
-    service.changeMedia(id, title);
+    console.log("change media ()");
+    console.log(title);
+    await service.changeMedia(id, title);
     service.getMediaBlocks().then((mbList) => {
       setMediaBlocks(mbList);
     });
@@ -95,4 +97,5 @@ export function useContent() {
 
 const deleteMovie = () => {
   return;
-}
+};
+

@@ -14,7 +14,8 @@ import ModalMediaViewer from "../features/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
-  const { content, mediaBlocks, getMediaBlocks, addMedia } = useContent();
+  const { content, mediaBlocks, changeMedia, getMediaBlocks, addMedia } =
+    useContent();
   const [anime, setAnime] = useState<Media[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
   const [isOpenCard, setIsOpenCard] = useState(false);
@@ -43,11 +44,7 @@ export default function Movie() {
   };
 
   const handleUpdateMovie = (updatedMovie: Media) => {
-    setAnime((prevMovies) =>
-      prevMovies.map((movie) =>
-        movie === selectedMovie ? updatedMovie : movie,
-      ),
-    );
+    changeMedia(updatedMovie.id!, updatedMovie);
   };
 
   return (

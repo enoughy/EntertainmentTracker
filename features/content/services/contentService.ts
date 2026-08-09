@@ -117,9 +117,11 @@ export async function changeMedia(id: number, newTitle: Media) {
       newTitle.contentStatus,
       mbCurrentStatNew + 1,
     );
+    console.log("store media block");
     mediaBlockRepository.storeMediaBlock(mb!);
   }
   title = { id: title.id, ...newTitle };
+  console.log(title);
   mediaRepository.addMedia(title);
 }
 
