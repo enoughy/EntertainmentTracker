@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ViewTransition } from "react";
 import Nav from "./components/navigation";
 import "./globals.css";
 //import backgroundImage from "../img/steve-a-johnson-jPT1hVOhqb0-unsplash.jpg";
@@ -54,8 +55,9 @@ export default function RootLayout({
 
         <div className="z-10 max-w-[1440px] h-[95vh] mx-auto flex  rounded-4xl overflow-hidden  shadow-[0_40px_120px_rgba(0,0,0,0.15)]">
           <Nav />
-          <main className="mx-auto overflow-y-auto bg-[var(--background)]/92">
-            {children}
+          <main className="mx-auto overflow-y-hidden relative bg-[var(--background)]/92">
+            {/* <div className="absolute -top-15 -right-15 bg-radial blur-2xl from-[#ecb7b7]/50 to-[#ecb7b7]/73 rounded-[50px] w-50 h-50 z-1000"></div> */}
+            <div className="content-anim-cont">{children} </div>
           </main>
 
           <footer></footer>
