@@ -92,3 +92,7 @@ export function useContent() {
     getMediaBlocks,
   };
 }
+
+const deleteMovie = () => {
+  return;
+}

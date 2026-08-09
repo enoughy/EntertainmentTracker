@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Nav from "./components/navigation";
 import "./globals.css";
-import backgroundImage from "../img/steve-a-johnson-jPT1hVOhqb0-unsplash.jpg";
+//import backgroundImage from "../img/steve-a-johnson-jPT1hVOhqb0-unsplash.jpg";
+//import backgroundImage from "@/public/guillaume-galtier-3YrppYQPoCI-unsplash.jpg";
+//import backgroundImage from "@/public/kenrick-mills-ppY9ZjLjB0o-unsplash.jpg";
+import backgroundImage from "@/public/pawel-czerwinski-95QNbCkVERM-unsplash.jpg";
+
 import { Manrope } from "next/font/google";
 
 const manrope = Manrope({
@@ -37,14 +41,20 @@ export default function RootLayout({
     >
       <body className="min-h-full flex justify-center items-center">
         <div
-          className="z-0 absolute inset-0 bg-cover bg-center bg-fixed opacity-30"
+          className="z-0 absolute inset-0 bg-cover bg-center bg-fixed opacity-100 blur-xs"
           style={{
             backgroundImage: `url(${backgroundImage.src})`,
           }}
-        />
-        <div className="z-10 max-w-[1440px] h-[95vh] mx-auto flex  rounded-2xl overflow-hidden">
+        >
+          <div className="z-5 absolute inset-0 bg-cover bg-center bg-fixed bg-black/0 "></div>
+        </div>
+        {/* <div className="absolute inset-0 bg-slate-100"> */}
+        {/*   <div className="absolute inset-0 bg-[linear-gradient(to_right,#dfe3e8_1px,transparent_1px),linear-gradient(to_bottom,#dfe3e8_1px,transparent_1px)] bg-[size:48px_48px]" /> */}
+        {/* </div> */}
+
+        <div className="z-10 max-w-[1440px] h-[95vh] mx-auto flex  rounded-4xl overflow-hidden  shadow-[0_40px_120px_rgba(0,0,0,0.15)]">
           <Nav />
-          <main className="mx-auto overflow-y-auto bg-[var(--background)]">
+          <main className="mx-auto overflow-y-auto bg-[var(--background)]/92">
             {children}
           </main>
 
