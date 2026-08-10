@@ -8,7 +8,7 @@ import Help from "./icons/help";
 
 export default function () {
   return (
-    <div className="shadow-[inset_-6px_0_6px_-6px_rgba(0,0,0,0.04)] bg-gradient-to-b from-[#f5f7f9] to-[#eceef2] backdrop-blur-2xl border border-black/[0.04] rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] lg:w-[332px] w-[200px] h-full flex flex-col shrink-0 px-4 py-6">
+    <div className="shadow-[inset_-6px_0_6px_-6px_rgba(0,0,0,0.04)] bg-gradient-to-b from-[#f5f7f9]/60 to-[#eceef2]/60 backdrop-blur-2xl border border-black/[0.04] rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] lg:w-[332px] w-[200px] h-full flex flex-col shrink-0 px-4 py-6">
       <div className="flex items-center gap-3 px-3 mb-16">
         <div className="size-10 rounded-xl bg-white/60" />
         <div>

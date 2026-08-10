@@ -110,3 +110,7 @@ export function useContent() {
   }, []);
   return { content, addMedia, getByType, getMediaBlocks, getAddedRecently };
 }
+
+const deleteMovie = () => {
+  return;
+}
