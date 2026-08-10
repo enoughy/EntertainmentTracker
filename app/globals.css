@@ -19,6 +19,8 @@
   /*Custom colors*/
 
   --color-text-main: #29292c;
+  --color-text-primary: #0069ff;
+  --color-text-gray-2: #6f7379;
   --color-text-gray: #898989;
 
   --color-nav-bg: #fff;
@@ -150,34 +152,34 @@ main {
   position: absolute;
   left: 52%;
 }
-.mediaCard{
+.mediaCard {
   cursor: pointer;
   animation: cardAnim 1.25s;
   transition: 0.25s ease;
 }
-.mediaCard:hover{
+.mediaCard:hover {
   transform: scale(1.02);
   background: rgb(255, 213, 213);
   border: 1px solid lightcoral;
-  box-shadow: -6px 7px 5px 0 rgba(0,0,0,0.25);
+  box-shadow: -6px 7px 5px 0 rgba(0, 0, 0, 0.25);
 }
-@keyframes cardAnim{
-  0%{
+@keyframes cardAnim {
+  0% {
     opacity: 0;
     filter: blur(3px);
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
     transform: translateY(30px);
     backdrop-filter: blur(10px);
     transition: all 0.8s ease;
   }
-  50%{
+  50% {
     transform: translateY(-2px);
   }
-  100%{
+  100% {
     opacity: 1;
     filter: blur(0px);
     transform: translateY(0);
     backdrop-filter: blur(0px);
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
   }
 }

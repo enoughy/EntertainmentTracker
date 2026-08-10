@@ -70,7 +70,9 @@ export default function Home() {
           </Suspense>
 
           <div className="col-span-3">
-            <AddedRecently></AddedRecently>
+            <AddedRecently
+              mediaList={content?.addedRecently.buffer ?? []}
+            ></AddedRecently>
           </div>
         </div>
       </div>

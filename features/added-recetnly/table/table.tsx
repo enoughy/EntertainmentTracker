@@ -10,17 +10,28 @@ const test: Media = {
   dateOfAdd: new Date(),
 };
 
-export function Table() {
+type TableProps = {
+  mediaList: Media[];
+};
+
+export function Table({ mediaList }: TableProps) {
   return (
     <>
-      {" "}
-      <div className="grid grid-cols-[4fr_3fr_3fr_3fr_1fr]">
+      <div className="grid grid-cols-[4fr_3fr_3fr_3fr_1fr] text-text-gray-2 text-[14px]  mb-3 ">
         <h2>Название</h2>
         <h2>Жанр</h2>
         <h2>Оценка</h2>
         <h2>Статус</h2>
       </div>
-      <TableItem item={test}></TableItem>
+      <div className=" border-b-1 border-text-gray-3 mb-5 -mx-5.5"></div>
+
+      {mediaList.length > 0 ? (
+        mediaList.map((md, index) => (
+          <TableItem key={index} item={md}></TableItem>
+        ))
+      ) : (
+        <div className="text-text-gray-2 font-medium text-4">Данных нет</div>
+      )}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { Media } from "@/features/content/entity/media";
 import { NoImage } from "@/img/svg/no-image/no-image";
 import { ContentStatus } from "@/types/content-status/content-status";
+import { TYPE_NAME } from "@/types/content-status/content-status-name";
 import { Star } from "lucide-react";
 
 type MediaCardProps = {
@@ -11,14 +12,6 @@ const options: Intl.DateTimeFormatOptions = {
   day: "2-digit",
   month: "2-digit",
   year: "2-digit",
-};
-
-const TYPE_NAME: Record<ContentStatus, string> = {
-  completed: "Просмотренно",
-  favorite: "Любимое",
-  dropped: "Брошено",
-  in_progress: "Просматриваю сейчас",
-  planning: "В планах",
 };
 
 export function MediaCard({ title, onClick }: MediaCardProps) {

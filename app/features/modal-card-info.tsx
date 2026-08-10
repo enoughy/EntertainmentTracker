@@ -4,6 +4,8 @@ import X from "@/app/components/icons/x";
 import { Media } from "@/features/content/entity/media";
 import { NoImage } from "@/img/svg/no-image/no-image";
 import { ContentStatus } from "@/types/content-status/content-status";
+import { TYPE_NAME } from "@/types/content-status/content-status-name";
+import { Rate } from "@/types/rate/rate";
 
 interface ModalMediaViewerProps {
   isOpenCard: boolean;
@@ -11,14 +13,6 @@ interface ModalMediaViewerProps {
   movie: Media | null;
   onUpdate?: (updatedMovie: Media) => void;
 }
-
-const TYPE_NAME: Record<ContentStatus, string> = {
-  completed: "Просмотренно",
-  favorite: "Любимое",
-  dropped: "Брошено",
-  in_progress: "Просматриваю сейчас",
-  planning: "В планах",
-};
 
 export default function ModalMediaViewer({
   isOpenCard,
@@ -93,7 +87,7 @@ export default function ModalMediaViewer({
               type="number"
               value={rate}
               className="mb-[10px]"
-              onChange={(e) => setRate(Number(e.target.value))}
+              onChange={(e) => setRate(Number(e.target.value) as Rate)}
             />
             <p className="mb-[10px]">
               Тип:{" "}
@@ -109,11 +103,11 @@ export default function ModalMediaViewer({
               value={status}
               onChange={(e) => setStatus(e.target.value as ContentStatus)}
             >
-              <option value="favorite">Любимое</option>
-              <option value="completed">Просмотренно</option>
-              <option value="in_progress">Просматриваю сейчас</option>
-              <option value="planning">В планах</option>
-              <option value="dropped">Брошено</option>
+              {Object.entries(TYPE_NAME).map(([key, value]) => (
+                <option key={key} value={key}>
+                  {value}
+                </option>
+              ))}
             </select>
             <p>Добавлено: {movie.dateOfAdd.toLocaleDateString("ru-RU")}</p>
           </div>

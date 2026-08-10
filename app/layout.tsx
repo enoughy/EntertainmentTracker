@@ -54,7 +54,7 @@ export default function RootLayout({
 
         <div className="z-10 max-w-[1440px] h-[95vh] mx-auto flex  rounded-4xl overflow-hidden  shadow-[0_40px_120px_rgba(0,0,0,0.15)]">
           <Nav />
-          <main className="mx-auto overflow-y-auto bg-[var(--background)]/92">
+          <main className="mx-auto overflow-y-auto [scrollbar-width:none]  bg-[var(--background)]/92">
             {children}
           </main>
 
