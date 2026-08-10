@@ -1,19 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ModalMediaEditor } from "../features/modal-media-editor";
+import { ModalMediaEditor } from "../../features/modal-media-editor/modal-media-editor";
 import { useContent } from "@/features/content/hooks/useContent";
 import { Media } from "@/features/content/entity/media";
-import Plus from "@/app/components/icons/plus";
-import { MediaCard } from "../features/media-card";
-import ModalMediaViewer from '../features/modal-card-info';
+import Plus from "@/components/icons/plus";
+import { MediaCard } from "../../features/media-card/media-card";
+import ModalMediaViewer from "../../features/modal-card-info/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenCard, setIsOpenCard] = useState(false);
   const { content, getMediaBlocks, addMedia } = useContent();
   const [movies, setMovies] = useState<Media[]>([]);
-  const [selectedMovie, setSelectedMovie] = useState<Media | null>(null)
+  const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
 
   useEffect(() => {
     if (content) {
@@ -39,15 +39,15 @@ export default function Movie() {
   const cardClick = (movie: Media) => {
     setSelectedMovie(movie);
     setIsOpenCard(true);
-  }
+  };
 
   const handleUpdateMovie = (updatedMovie: Media) => {
-    setMovies(prevMovies => 
-      prevMovies.map(movie => 
-        movie === selectedMovie ? updatedMovie : movie
-      )
+    setMovies((prevMovies) =>
+      prevMovies.map((movie) =>
+        movie === selectedMovie ? updatedMovie : movie,
+      ),
     );
-  }
+  };
 
   return (
     <>
@@ -68,9 +68,9 @@ export default function Movie() {
         addMedia={addMedia}
       ></ModalMediaEditor>
 
-      <ModalMediaViewer 
-        isOpenCard={isOpenCard} 
-        setIsOpenCard={setIsOpenCard} 
+      <ModalMediaViewer
+        isOpenCard={isOpenCard}
+        setIsOpenCard={setIsOpenCard}
         movie={selectedMovie}
         onUpdate={handleUpdateMovie}
       ></ModalMediaViewer>
@@ -81,7 +81,11 @@ export default function Movie() {
             <p className="noneText">Фильмов пока нет</p>
           ) : (
             movies.map((movie, index) => (
-              <MediaCard key={index} title={movie} onClick={() => cardClick(movie)}></MediaCard>
+              <MediaCard
+                key={index}
+                title={movie}
+                onClick={() => cardClick(movie)}
+              ></MediaCard>
             ))
           )}
         </div>

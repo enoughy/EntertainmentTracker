@@ -1,16 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Modal } from "@/app/components/modal";
-import X from "@/app/components/icons/x";
+import { Modal } from "@/components/modal/modal";
+import X from "@/components/icons/x";
 import { setDataStartEndIndexes } from "recharts/types/state/chartDataSlice";
-import { ModalMediaEditor } from "../features/modal-media-editor";
+import { ModalMediaEditor } from "../../features/modal-media-editor/modal-media-editor";
 import { useContent } from "@/features/content/hooks/useContent";
 import { Media } from "@/features/content/entity/media";
-import Plus from "@/app/components/icons/plus";
+import Plus from "@/components/icons/plus";
 import { ContentStatus } from "@/types/content-status/content-status";
-import { MediaCard } from "../features/media-card";
-import ModalMediaViewer from "../features/modal-card-info";
+import { MediaCard } from "../../features/media-card/media-card";
+import ModalMediaViewer from "../../features/modal-card-info/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
