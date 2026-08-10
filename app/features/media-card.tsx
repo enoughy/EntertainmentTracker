@@ -28,10 +28,7 @@ export function MediaCard({ title, onClick }: MediaCardProps) {
   }
 
   return (
-    <div
-      className="border border-[rgba(0,0,0,0.3)] bg-black/[0.05] p-[15px] rounded-[24px] mediaCard"
-      onClick={onClick}
-    >
+    <div className="p-[15px] rounded-[24px] mediaCard" onClick={onClick}>
       <div className="relative w-full  aspect-2/3 overflow-hidden rounded-2xl ">
         {imgUrl !== "" ? (
           <img

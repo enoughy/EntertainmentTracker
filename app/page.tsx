@@ -11,6 +11,7 @@ import { Media } from "@/features/content/entity/media";
 import { MediaBlock } from "@/features/content/entity/mediaBlock";
 import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
 import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
+import { motion } from "motion/react";
 
 function BaseStatCardPlaceHolder() {
   return (
@@ -68,30 +69,51 @@ export default function Home() {
     <>
       <div className="p-12 text-text-gray text-[28px]">
         <h1 className="mb-10 text">Статистика трекера</h1>
-        <div className="grid grid-cols-1 justify-items-center second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
-          <Suspense fallback={<></>}>
-            {mediaBlockList.map((item) => {
-              return (
-                <BaseStatCard
-                  key={item.typeId}
-                  name={item.typeId}
-                  countAll={item.count}
-                  countChange={
-                    item.countAddedInMonths?.get(
-                      MONTHS_MAP[new Date().getMonth()] ?? "January",
-                    ) ?? 0
-                  }
-                  proc={procCalculate(item)}
-                ></BaseStatCard>
-              );
-            })}
-            <div className="col-span-1 second:col-span-2 first:col-span-2">
-              <DountChartContainer data={dountChartData}></DountChartContainer>
-            </div>
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 100,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          exit={{
+            opacity: 0,
+            y: -100,
+          }}
+          transition={{
+            duration: 0.8,
+            type: "spring",
+          }}
+        >
+          <div className="grid grid-cols-1 justify-items-center second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
+            <Suspense fallback={<></>}>
+              {mediaBlockList.map((item) => {
+                return (
+                  <BaseStatCard
+                    key={item.typeId}
+                    name={item.typeId}
+                    countAll={item.count}
+                    countChange={
+                      item.countAddedInMonths?.get(
+                        MONTHS_MAP[new Date().getMonth()] ?? "January",
+                      ) ?? 0
+                    }
+                    proc={procCalculate(item)}
+                  ></BaseStatCard>
+                );
+              })}
+              <div className="col-span-1 second:col-span-2 first:col-span-2">
+                <DountChartContainer
+                  data={dountChartData}
+                ></DountChartContainer>
+              </div>
 
-            <BarChartComp data={barChartData}></BarChartComp>
-          </Suspense>
-        </div>
+              <BarChartComp data={barChartData}></BarChartComp>
+            </Suspense>
+          </div>
+        </motion.div>
       </div>
     </>
   );
