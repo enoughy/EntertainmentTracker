@@ -1,4 +1,5 @@
 import { BaseCard } from "@/components/base-card/base-card";
+import { StatusCard } from "@/components/status-card/status-card";
 import {
   BarChart,
   Bar,
@@ -24,6 +25,7 @@ export function BarChartComp({ data }: BarChartProps) {
     <BaseCard className="max-w-[326px] pt-8 pb-2">
       <div className="flex justify-between items-center">
         <h4 className="text-[#29292C] text-[20px]">Добавлено</h4>
+
         <span className="text-[#898989] text-[15px]">
           {data[-1] === undefined ? "" : data[0].mount + " - " + data[-1].mount}
         </span>
