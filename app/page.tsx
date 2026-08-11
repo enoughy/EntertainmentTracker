@@ -43,13 +43,14 @@ export default function Home() {
 
   return (
     <>
-      <div className="p-12 text-text-gray text-[28px]">
+      <div className="p-4 first:p-12 text-text-gray text-[28px]">
         <h1 className="mb-10 text">Статистика трекера</h1>
-        <div className="grid grid-cols-1 justify-items-center second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
-          <Suspense fallback={<></>}>
+        <div className="grid grid-cols-1 second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
+          <div className="col-span-1 first:col-span-2 second:col-span-3 grid grid-cols-1 first:grid-cols-1 second:grid-cols-3">
             {mediaBlockList.map((item) => {
               return (
                 <BaseStatCard
+                  className=""
                   key={item.typeId}
                   name={item.typeId}
                   countAll={item.count}
@@ -62,14 +63,15 @@ export default function Home() {
                 ></BaseStatCard>
               );
             })}
-            <div className="col-span-1 second:col-span-2 first:col-span-2">
-              <DountChartContainer data={dountChartData}></DountChartContainer>
-            </div>
+          </div>
+          <div className="col-span-1 second:col-span-2 first:col-span-2 flex items-center justify-center second:block">
+            <DountChartContainer data={dountChartData}></DountChartContainer>
+          </div>
 
+          <div className="col-span-1 second:col-span-1 first:col-span-2">
             <BarChartComp data={barChartData}></BarChartComp>
-          </Suspense>
-
-          <div className="col-span-3">
+          </div>
+          <div className="col-span-1 second:col-span-3 first:col-span-2">
             <AddedRecently
               mediaList={content?.addedRecently.buffer ?? []}
             ></AddedRecently>

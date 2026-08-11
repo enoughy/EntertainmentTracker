@@ -52,7 +52,7 @@ export default function RootLayout({
         {/*   <div className="absolute inset-0 bg-[linear-gradient(to_right,#dfe3e8_1px,transparent_1px),linear-gradient(to_bottom,#dfe3e8_1px,transparent_1px)] bg-[size:48px_48px]" /> */}
         {/* </div> */}
 
-        <div className="z-10 max-w-[1440px] h-[95vh] mx-auto flex  rounded-4xl overflow-hidden  shadow-[0_40px_120px_rgba(0,0,0,0.15)]">
+        <div className="z-10 max-w-[1440px] md:h-[95vh] mx-auto flex  md:rounded-4xl overflow-hidden  shadow-[0_40px_120px_rgba(0,0,0,0.15)]">
           <Nav />
           <main className="mx-auto overflow-y-auto [scrollbar-width:none]  bg-[var(--background)]/92">
             {children}

@@ -11,6 +11,7 @@ type BaseStatCardProps = {
   countAll: number;
   countChange: number;
   proc: number;
+  className?: string;
 };
 
 export function BaseStatCard({
@@ -18,9 +19,15 @@ export function BaseStatCard({
   countAll,
   countChange,
   proc,
+  className,
 }: BaseStatCardProps) {
   return (
-    <BaseCard className="flex w-80.5 h-37.5 mr-3 pt-[38px] justify-between">
+    <BaseCard
+      className={
+        "flex w-full second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between " +
+        className
+      }
+    >
       <div>
         <div className="text-[#898989]  text-[17px]">{name}</div>
         {/* All count in topic text*/}

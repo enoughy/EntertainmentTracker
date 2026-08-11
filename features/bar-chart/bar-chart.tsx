@@ -21,7 +21,7 @@ const colorStop = "#002CFF";
 
 export function BarChartComp({ data }: BarChartProps) {
   return (
-    <BaseCard className="max-w-[326px] pt-8 pb-2">
+    <BaseCard className="w-full second:max-w-[326px] pt-8 pb-2">
       <div className="flex justify-between items-center">
         <h4 className="text-[#29292C] text-[20px]">Добавлено</h4>
         <span className="text-[#898989] text-[15px]">

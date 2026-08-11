@@ -8,8 +8,8 @@ type DountChartContainerProps = {
 
 export function DountChartContainer({ data }: DountChartContainerProps) {
   return (
-    <div className="max-w-[656px]">
-      <Header className="mb-5"></Header>
+    <div className="w-full second:max-w-[656px]">
+      <Header className="mx-auto mb-5"></Header>
       <div className="flex flex-col sm:flex-row items-center justify-between">
         <DountChart name="Аниме" stat={data[0]}></DountChart>
         <DountChart name="Сериалы" stat={data[1]}></DountChart>
