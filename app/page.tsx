@@ -12,6 +12,7 @@ import { MediaBlock } from "@/features/content/entity/mediaBlock";
 import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
 import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
 import { motion } from "motion/react";
+import { StatusCard } from "@/components/status-card/status-card";
 
 function BaseStatCardPlaceHolder() {
   return (
