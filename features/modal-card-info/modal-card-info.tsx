@@ -1,6 +1,6 @@
-import { Modal } from "@/app/components/modal";
+import { Modal } from "@/components/modal/modal";
 import { useState, useEffect } from "react";
-import X from "@/app/components/icons/x";
+import X from "@/components/icons/x";
 import { Media } from "@/features/content/entity/media";
 import { NoImage } from "@/img/svg/no-image/no-image";
 import { ContentStatus } from "@/types/content-status/content-status";

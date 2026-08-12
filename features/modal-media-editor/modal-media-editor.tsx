@@ -1,5 +1,5 @@
-import { Modal } from "@/app/components/modal";
-import X from "@/app/components/icons/x";
+import { Modal } from "@/components/modal/modal";
+import X from "@/components/icons/x";
 import { setDataStartEndIndexes } from "recharts/types/state/chartDataSlice";
 import { ContentStatus } from "@/types/content-status/content-status";
 import { Rate } from "@/types/rate/rate";

@@ -1,10 +1,10 @@
-import Film from "./icons/film";
-import Chart from "./icons/chart";
-import Series from "./icons/series";
-import Anime from "./icons/clapperboard";
-import Settings from "./icons/settings";
+import Film from "@/components/icons/film";
+import Chart from "@/components//icons/chart";
+import Series from "@/components/icons/series";
+import Anime from "@/components/icons/clapperboard";
+import Settings from "@/components/icons/settings";
 import Link from "next/link";
-import Help from "./icons/help";
+import Help from "@/components/icons/help";
 
 export default function () {
   return (

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Nav from "./components/navigation";
+import Nav from "../features/navigation/navigation";
 import "./globals.css";
 //import backgroundImage from "../img/steve-a-johnson-jPT1hVOhqb0-unsplash.jpg";
 //import backgroundImage from "@/public/guillaume-galtier-3YrppYQPoCI-unsplash.jpg";
@@ -56,6 +56,7 @@ export default function RootLayout({
           <Nav />
           <main className="mx-auto overflow-y-auto [scrollbar-width:none]  bg-[var(--background)]/92">
             {children}
+            {/* <div className="absolute -top-15 -right-15 bg-radial blur-2xl from-[#ecb7b7]/50 to-[#ecb7b7]/73 rounded-[50px] w-50 h-50 z-1000"></div> */}
           </main>
 
           <footer></footer>

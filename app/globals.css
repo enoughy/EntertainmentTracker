@@ -18,6 +18,10 @@
 
   /*Custom colors*/
 
+  --color-primary-start: #002cff;
+
+  --color-primary-stop: #5570f1;
+
   --color-text-main: #29292c;
   --color-text-primary: #0069ff;
   --color-text-gray-2: #6f7379;
@@ -47,6 +51,56 @@
     @apply w-full rounded-[4px] border border-slate-200 h-10 px-4 py-3 text-sm placeholder-slate-400 outline-none transition-all focus:border-indigo-600 mb-3;
   }
 }
+
+::view-transition-group(*) {
+  animation: none;
+}
+
+::view-transition-old(*) {
+  animation: none;
+}
+
+::view-transition-new(*) {
+  animation: none;
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+::view-transition-new(.slide) {
+  animation: slide-in linear 0.2s forwards;
+}
+
+::view-transition-old(.slide) {
+  animation: slide-out linear 0.2s forwards;
+}
+
+/* ::view-transition-group(.slide) { */
+/*   animation: none; */
+/* } */
+
+/* ::view-transition-group(.update) { */
+/*   animation-duration: 0.5s; */
+/*   animation-timing-function: ease-in-out; */
+/* } */
 
 body {
   background: var(--background);
@@ -159,15 +213,16 @@ main {
 }
 .mediaCard:hover {
   transform: scale(1.02);
-  background: rgb(255, 213, 213);
-  border: 1px solid lightcoral;
-  box-shadow: -6px 7px 5px 0 rgba(0, 0, 0, 0.25);
+
+  /* background: rgb(255, 213, 213); */
+  /* background: linear-gradient(to right, #002cff30, #5570f130); */
+  box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.25);
 }
+
 @keyframes cardAnim {
   0% {
     opacity: 0;
     filter: blur(3px);
-    background: rgba(0, 0, 0, 0);
     transform: translateY(30px);
     backdrop-filter: blur(10px);
     transition: all 0.8s ease;
@@ -180,6 +235,5 @@ main {
     filter: blur(0px);
     transform: translateY(0);
     backdrop-filter: blur(0px);
-    background: rgba(0, 0, 0, 0.05);
   }
 }
