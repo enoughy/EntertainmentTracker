@@ -3,19 +3,13 @@ import { SpringAnime } from "@/components/animations/spring-anim/spring-anim";
 import { ContentStatus } from "@/types/content-status/content-status";
 import { DountChartData } from "@/types/dount-chart-stat/dount-chart-stat";
 import { Pie, PieChart, ResponsiveContainer, Sector } from "recharts";
+import { STATUS_COLORS } from "@/types/content-status/status-colors";
 type DountChartProps = {
   stat: DountChartData;
   name: string;
 };
 
 export function DountChart({ stat, name }: DountChartProps) {
-  const STATUS_COLORS: Record<string, string> = {
-    favorite: "#FF6787",
-    in_progress: "#FFC766",
-    planning: "#9A99F4",
-    completed: "#87D68D", // "#B3FFFC",
-    dropped: "#483C46", //"#373F51",
-  };
   return (
     <SpringAnime>
       <BaseCard className="w-[207px] h-[228px] rounded-[55px] pt-7">

@@ -45,7 +45,6 @@ export function BarChartComp({ data }: BarChartProps) {
               />
             </linearGradient>
           </defs>
-
           <CartesianGrid vertical={false} strokeDasharray="8 8" opacity={0.4} />
           <XAxis tick={{ fontSize: 12 }} interval={0} dataKey="mount" />
           <YAxis tick={{ fontSize: 12 }} width="auto" />
