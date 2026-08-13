@@ -14,14 +14,14 @@ import ModalMediaViewer from "../../features/modal-card-info/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
-  const { content, getMediaBlocks, addMedia } = useContent();
+  const { content, mediaBlocks, changeMedia, getMediaBlocks, addMedia } =
+    useContent();
   const [anime, setAnime] = useState<Media[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
   const [isOpenCard, setIsOpenCard] = useState(false);
 
   useEffect(() => {
-    if (content) {
-      const mediaBlocks = getMediaBlocks?.();
+    if (content || mediaBlocks) {
       if (mediaBlocks) {
         const allMedia: Media[] = [];
         Object.values(mediaBlocks).forEach((block) => {
@@ -33,12 +33,10 @@ export default function Movie() {
           (item) => item.contentType === "anime",
         );
 
-        if (filteredAnime.length !== anime.length) {
-          setAnime(filteredAnime);
-        }
+        setAnime(filteredAnime);
       }
     }
-  }, [content, getMediaBlocks]);
+  }, [mediaBlocks]);
 
   const cardClick = (movie: Media) => {
     setSelectedMovie(movie);
@@ -46,11 +44,7 @@ export default function Movie() {
   };
 
   const handleUpdateMovie = (updatedMovie: Media) => {
-    setAnime((prevMovies) =>
-      prevMovies.map((movie) =>
-        movie === selectedMovie ? updatedMovie : movie,
-      ),
-    );
+    changeMedia(updatedMovie.id!, updatedMovie);
   };
 
   return (
@@ -70,6 +64,7 @@ export default function Movie() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         addMedia={addMedia}
+        type={"anime"}
       ></ModalMediaEditor>
 
       <ModalMediaViewer

@@ -10,31 +10,28 @@ import ModalMediaViewer from "../../features/modal-card-info/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
+  const { content, mediaBlocks, addMedia } = useContent();
   const [isOpenCard, setIsOpenCard] = useState(false);
-  const { content, getMediaBlocks, addMedia } = useContent();
   const [movies, setMovies] = useState<Media[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
 
   useEffect(() => {
-    if (content) {
-      const mediaBlocks = getMediaBlocks?.();
-      if (mediaBlocks) {
-        const allMedia: Media[] = [];
-        Object.values(mediaBlocks).forEach((block) => {
-          if (block.mediaList && Array.isArray(block.mediaList)) {
-            allMedia.push(...block.mediaList);
-          }
-        });
-        const filteredMovies = allMedia.filter(
-          (item) => item.contentType === "film",
-        );
-
-        if (filteredMovies.length !== movies.length) {
-          setMovies(filteredMovies);
+    if (mediaBlocks) {
+      const allMedia: Media[] = [];
+      Object.values(mediaBlocks).forEach((block) => {
+        if (block.mediaList && Array.isArray(block.mediaList)) {
+          allMedia.push(...block.mediaList);
         }
+      });
+      const filteredMovies = allMedia.filter(
+        (item) => item.contentType === "film",
+      );
+
+      if (filteredMovies.length !== movies.length) {
+        setMovies(filteredMovies);
       }
     }
-  }, [content, getMediaBlocks]);
+  }, [content, mediaBlocks]);
 
   const cardClick = (movie: Media) => {
     setSelectedMovie(movie);
@@ -66,6 +63,7 @@ export default function Movie() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         addMedia={addMedia}
+        type={"film"}
       ></ModalMediaEditor>
 
       <ModalMediaViewer

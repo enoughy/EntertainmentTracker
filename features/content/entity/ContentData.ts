@@ -5,7 +5,8 @@ import { Months } from "@/types/date/months";
 import { MediaBlock } from "./mediaBlock";
 
 export interface ContentData {
-  content: Map<ContentType, MediaBlock>;
+  id: number;
+  //content: Map<ContentType, MediaBlock>;
   addedRecently: shiftBuff<Media>;
   countAddedInMonths: Map<Months, number>;
 }

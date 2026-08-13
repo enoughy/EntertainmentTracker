@@ -1,87 +1,134 @@
 import { Media } from "../entity/media";
 import { MediaBlock } from "../entity/mediaBlock";
-import { ContentData } from "../entity/ContentData";
-import { ContentType } from "@/types/content-type/contentType";
 import { Months, MONTHS_MAP } from "@/types/date/months";
 import { shiftBuff } from "@/features/content/adictStruct/shiftBuffer";
+import * as mediaRepository from "../bd/mediaRepository";
+import * as contentRepository from "../bd/contentRepository";
+import * as mediaBlockRepository from "../bd/mediaBlockRepository";
+import { contentDataInit } from "@/features/contentItin";
+import { ContentData } from "../entity/ContentData";
 
-export function add(title: Media, data: ContentData): ContentData {
-  let newContent: ContentData = { ...data };
-  console.log("data");
-  if (!newContent.content.has(title.contentType)) {
-    const newMb: MediaBlock = {
+export async function addMedia(title: Media) {
+  let content: ContentData | undefined = await contentRepository.getContent();
+
+  if (content == null) {
+    content = contentDataInit();
+  }
+
+  content.addedRecently = new shiftBuff(content.addedRecently);
+
+  content.addedRecently.push(title);
+
+  let currentCountInMonth =
+    content.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) || 0;
+  content.countAddedInMonths.set(
+    MONTHS_MAP[title.dateOfAdd.getMonth()],
+    currentCountInMonth + 1,
+  );
+
+  contentRepository.storeContent(content);
+
+  let mb = await mediaBlockRepository.getMediaBlockByType(title.contentType);
+
+  console.log("mb:");
+  console.log(mb);
+  if (mb == null) {
+    mb = {
       typeId: title.contentType,
       mediaList: [],
       count: 0,
       countAddedInMonths: new Map(),
       contentStatusStatistic: new Map(),
     };
-    newContent = {
-      ...newContent,
-      content: new Map(data.content).set(title.contentType, newMb),
-    };
+    console.log("create new mb");
   }
+  currentCountInMonth =
+    mb.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) || 0;
 
-  const oldMb = newContent.content.get(title.contentType)!;
-
-  const newCurrMb: MediaBlock = {
-    ...oldMb,
-    mediaList: [...oldMb.mediaList],
-    countAddedInMonths: new Map(oldMb.countAddedInMonths),
-    contentStatusStatistic: new Map(oldMb.contentStatusStatistic),
-  };
-
-  newCurrMb!.count!++;
-  const countAddedInMonths =
-    newCurrMb!.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) ??
-    0;
-  newCurrMb!.countAddedInMonths.set(
-    MONTHS_MAP[title.dateOfAdd.getMonth()],
-    countAddedInMonths + 1,
-  );
-  newCurrMb!.contentStatusStatistic.set(
-    title.contentStatus,
-    (newCurrMb!.contentStatusStatistic.get(title.contentStatus) ?? 0) + 1,
-  );
-  newCurrMb!.mediaList.push(title);
-
-  newContent.content = new Map(newContent.content).set(
-    title.contentType,
-    newCurrMb,
-  );
-
-  newContent.addedRecently = new shiftBuff(newContent.addedRecently);
-  newContent.addedRecently.push(title);
-
-  const currentCountInMonth =
-    newContent.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) ||
-    0;
-
-  newContent.countAddedInMonths = new Map(newContent.countAddedInMonths).set(
+  mb.countAddedInMonths.set(
     MONTHS_MAP[title.dateOfAdd.getMonth()],
     currentCountInMonth + 1,
   );
-  return newContent;
+  mb.count++;
+  const mbCurrentStat = mb.contentStatusStatistic.get(title.contentStatus) || 0;
+  mb.contentStatusStatistic.set(title.contentStatus, mbCurrentStat + 1);
+  title.id = await mediaRepository.addMedia(title);
+
+  mb.mediaList.push(title);
+
+  mediaBlockRepository.storeMediaBlock(mb);
 }
-export function addMediaList(
-  mdList: Media[],
-  content: ContentData,
-): ContentData {
-  let newContent: ContentData = content;
-  for (let md of mdList) {
-    newContent = add(md, newContent);
+
+export async function deleteMedia(id: number) {
+  let title = await mediaRepository.getMediaById(id);
+  if (title == null) {
+    console.log("deleteMedia error title not in db");
+    return;
   }
-  return newContent;
+  let content: ContentData | undefined = await contentRepository.getContent();
+  if (content == null) {
+    console.log("deleteMedia error content is null");
+    return;
+  }
+
+  let currentCountInMonth =
+    content.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) || 0;
+  content.countAddedInMonths.set(
+    MONTHS_MAP[title.dateOfAdd.getMonth()],
+    currentCountInMonth - 1,
+  );
+
+  contentRepository.storeContent(content);
+
+  let mb = await mediaBlockRepository.getMediaBlockByType(title.contentType);
+
+  currentCountInMonth =
+    mb!.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) || 0;
+
+  mb!.countAddedInMonths.set(
+    MONTHS_MAP[title.dateOfAdd.getMonth()],
+    currentCountInMonth - 1,
+  );
+  mb!.count--;
+  const mbCurrentStat =
+    mb!.contentStatusStatistic.get(title.contentStatus) || 0;
+  mb!.contentStatusStatistic.set(title.contentStatus, mbCurrentStat - 1);
+
+  mb!.mediaList = mb!.mediaList.filter((item) => item.id !== id);
+  mediaBlockRepository.storeMediaBlock(mb!);
 }
-export function getByType(
-  key: ContentType,
-  data: ContentData,
-): MediaBlock | null {
-  return data.content.get(key) ?? null;
+
+export async function changeMedia(id: number, newTitle: Media) {
+  let title = await mediaRepository.getMediaById(id);
+  if (title == null) {
+    console.log("change media error this title dose not exist");
+    return;
+  }
+  if (title.contentStatus !== newTitle.contentStatus) {
+    const mb = await mediaBlockRepository.getMediaBlockByType(
+      title.contentType,
+    );
+    const mbCurrentStat = mb!.contentStatusStatistic.get(title.contentStatus)!;
+    mb!.contentStatusStatistic.set(title.contentStatus, mbCurrentStat - 1);
+
+    const mbCurrentStatNew =
+      mb!.contentStatusStatistic.get(title.contentStatus) || 0;
+    mb!.contentStatusStatistic.set(
+      newTitle.contentStatus,
+      mbCurrentStatNew + 1,
+    );
+    console.log("store media block");
+    mediaBlockRepository.storeMediaBlock(mb!);
+  }
+  title = { id: title.id, ...newTitle };
+  console.log(title);
+  mediaRepository.addMedia(title);
 }
-export function getAddedRecently(data: ContentData): Media[] {
-  return data.addedRecently.getValues();
+
+export async function getMediaBlocks(): Promise<MediaBlock[] | undefined> {
+  return mediaBlockRepository.getMediaBlockAll();
 }
-export function getMediaBlocks(data: ContentData): MediaBlock[] {
-  return Array.from(data.content.values());
+
+export async function getContent() {
+  return contentRepository.getContent();
 }
