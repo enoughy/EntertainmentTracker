@@ -11,7 +11,7 @@ interface ModalMediaViewerProps {
   isOpenCard: boolean;
   setIsOpenCard: (isOpen: boolean) => void;
   movie: Media | null;
-  onUpdate?: (updatedMovie: Media) => void;
+  onUpdate: (updatedMovie: Media) => void;
 }
 
 export default function ModalMediaViewer({
@@ -44,9 +44,7 @@ export default function ModalMediaViewer({
       contentStatus: status,
     };
 
-    if (onUpdate) {
-      onUpdate(updatedMovie);
-    }
+    onUpdate(updatedMovie);
 
     setIsOpenCard(false);
   };
@@ -132,7 +130,7 @@ export default function ModalMediaViewer({
             className="border border-black/[0.5] p-[3px] rounded-[12px] cursor-pointer"
             onClick={() => {
               rate <= 10 && rate > 1
-                ? save
+                ? save()
                 : alert("Рейтинг должен быть то 1 до 10 ulululu");
             }}
           >

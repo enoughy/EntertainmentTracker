@@ -1,13 +1,17 @@
-import { shiftBuff } from "@/adictStruct/shiftBuffer";
+import { shiftBuff } from "@/features/content/adictStruct/shiftBuffer";
 import { ContentData } from "./content/entity/ContentData";
 import { MediaBlock } from "./content/entity/mediaBlock";
 
 export function contentDataInit(): ContentData {
   const content: ContentData = {
-    content: new Map(),
+    id: 0,
     addedRecently: new shiftBuff(),
     countAddedInMonths: new Map(),
   };
+  return content;
+}
+
+export function MediaBlockInit(): MediaBlock[] {
   const anime: MediaBlock = {
     typeId: "anime",
     mediaList: [],
@@ -29,8 +33,5 @@ export function contentDataInit(): ContentData {
     contentStatusStatistic: new Map(),
     countAddedInMonths: new Map(),
   };
-  content.content.set("anime", anime);
-  content.content.set("series", series);
-  content.content.set("film", film);
-  return content;
+  return [anime, film, series];
 }

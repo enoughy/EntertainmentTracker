@@ -2,7 +2,7 @@ export function PlotUp() {
   return (
     <svg
       width="65"
-      height="35"
+      height="39"
       viewBox="0 0 65 35"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
