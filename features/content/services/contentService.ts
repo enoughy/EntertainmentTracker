@@ -3,7 +3,7 @@ import { MediaBlock } from "../entity/mediaBlock";
 import { ContentData } from "../entity/ContentData";
 import { ContentType } from "@/types/content-type/contentType";
 import { Months, MONTHS_MAP } from "@/types/date/months";
-import { shiftBuff } from "@/adictStruct/shiftBuffer";
+import { shiftBuff } from "@/features/content/adictStruct/shiftBuffer";
 
 export function add(title: Media, data: ContentData): ContentData {
   let newContent: ContentData = { ...data };

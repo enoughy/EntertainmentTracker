@@ -3,56 +3,22 @@ import { BaseStatCard } from "@/features/base-stat-card/base-stat-card";
 import { DountChartData } from "@/types/dount-chart-stat/dount-chart-stat";
 import { DountChartContainer } from "@/features/dount-chart-container/dount-chart-container";
 import { BarChartComp } from "@/features/bar-chart/bar-chart";
-import { Suspense, use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BarChartData } from "@/features/bar-chart/bar-chart";
 import { MONTHS_MAP } from "@/types/date/months";
 import { useContent } from "@/features/content/hooks/useContent";
-import { Media } from "@/features/content/entity/media";
 import { MediaBlock } from "@/features/content/entity/mediaBlock";
 import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
 import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
-import { motion } from "motion/react";
-
-function BaseStatCardPlaceHolder() {
-  return (
-    <>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={0}
-        proc={0}
-        countChange={0}
-      ></BaseStatCard>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={0}
-        proc={0}
-        countChange={0}
-      ></BaseStatCard>
-      <BaseStatCard
-        name="Фильмы"
-        countAll={0}
-        proc={0}
-        countChange={0}
-      ></BaseStatCard>
-    </>
-  );
-}
-
-function procCalculate(item: MediaBlock): number {
-  const currMonth = MONTHS_MAP.at(new Date().getMonth())!;
-  const prevMonth = MONTHS_MAP.at(new Date().getMonth() - 1)!;
-  const currVal = item.countAddedInMonths?.get(currMonth) ?? 0;
-  const prevVal = item.countAddedInMonths?.get(prevMonth) ?? 0;
-  const ret = ((currVal - prevVal) / prevVal) * 100;
-
-  return Number.isFinite(ret) ? ret : 0;
-}
+import { SpringAnime } from "@/components/animations/spring-anim/spring-anim";
+import { PageInitAnim } from "@/components/animations/page-init-anim/page-init-anim";
+import { procCalculate } from "@/features/content/services/procCalculate";
 
 export default function Home() {
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
   const [barChartData, setBarChartData] = useState<BarChartData>([]);
-  const { content, addMedia, getMediaBlocks } = useContent();
+  const { content, getMediaBlocks } = useContent();
 
   useEffect(() => {
     const currMediaBlockList = getMediaBlocks() ?? [];
@@ -65,34 +31,17 @@ export default function Home() {
     setDountCahrData(dChData);
     setBarChartData(barChartDataMapper(content!));
   }, [content]);
+
   return (
     <>
       <div className="p-12 text-text-gray text-[28px]">
         <h1 className="mb-10 text">Статистика трекера</h1>
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 100,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          exit={{
-            opacity: 0,
-            y: -100,
-          }}
-          transition={{
-            duration: 0.8,
-            type: "spring",
-          }}
-        >
+        <PageInitAnim>
           <div className="grid grid-cols-1 justify-items-center second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
-            <Suspense fallback={<></>}>
-              {mediaBlockList.map((item) => {
-                return (
+            {mediaBlockList.map((item) => {
+              return (
+                <SpringAnime key={item.typeId}>
                   <BaseStatCard
-                    key={item.typeId}
                     name={item.typeId}
                     countAll={item.count}
                     countChange={
@@ -102,18 +51,17 @@ export default function Home() {
                     }
                     proc={procCalculate(item)}
                   ></BaseStatCard>
-                );
-              })}
-              <div className="col-span-1 second:col-span-2 first:col-span-2">
-                <DountChartContainer
-                  data={dountChartData}
-                ></DountChartContainer>
-              </div>
+                </SpringAnime>
+              );
+            })}
 
-              <BarChartComp data={barChartData}></BarChartComp>
-            </Suspense>
+            <div className="col-span-1 second:col-span-2 first:col-span-2">
+              <DountChartContainer data={dountChartData}></DountChartContainer>
+            </div>
+
+            <BarChartComp data={barChartData}></BarChartComp>
           </div>
-        </motion.div>
+        </PageInitAnim>
       </div>
     </>
   );

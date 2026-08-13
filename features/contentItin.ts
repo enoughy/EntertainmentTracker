@@ -1,4 +1,4 @@
-import { shiftBuff } from "@/adictStruct/shiftBuffer";
+import { shiftBuff } from "@/features/content/adictStruct/shiftBuffer";
 import { ContentData } from "./content/entity/ContentData";
 import { MediaBlock } from "./content/entity/mediaBlock";
 

@@ -1,5 +1,5 @@
 import { ContentType } from "@/types/content-type/contentType";
-import { shiftBuff } from "@/adictStruct/shiftBuffer";
+import { shiftBuff } from "@/features/content/adictStruct/shiftBuffer";
 import { Media } from "./media";
 import { Months } from "@/types/date/months";
 import { MediaBlock } from "./mediaBlock";
