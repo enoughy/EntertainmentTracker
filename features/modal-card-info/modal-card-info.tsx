@@ -4,7 +4,7 @@ import X from "@/components/icons/x";
 import { Media } from "@/features/content/entity/media";
 import { NoImage } from "@/img/svg/no-image/no-image";
 import { ContentStatus } from "@/types/content-status/content-status";
-import { TYPE_NAME } from "@/types/content-status/content-status-name";
+import { STATUS_NAME } from "@/types/content-status/content-status-name";
 import { Rate } from "@/types/rate/rate";
 
 interface ModalMediaViewerProps {
@@ -101,7 +101,7 @@ export default function ModalMediaViewer({
               value={status}
               onChange={(e) => setStatus(e.target.value as ContentStatus)}
             >
-              {Object.entries(TYPE_NAME).map(([key, value]) => (
+              {Object.entries(STATUS_NAME).map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
                 </option>

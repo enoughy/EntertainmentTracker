@@ -12,13 +12,16 @@ const test: Media = {
 
 type TableProps = {
   mediaList: Media[];
+  onClick: (item: any) => void;
+  handlerDelete?: (item: any) => void;
 };
 
-export function Table({ mediaList }: TableProps) {
+export function Table({ mediaList, onClick, handlerDelete }: TableProps) {
   return (
     <>
-      <div className="grid grid-cols-[4fr_3fr_3fr_3fr_1fr] text-text-gray-2 text-[14px]  mb-3 ">
+      <div className="grid grid-cols-[7fr_6fr_6fr_4fr_6fr_1fr] text-text-gray-2 text-[14px]  mb-3 ">
         <h2>Название</h2>
+        <h2>Тип</h2>
         <h2>Жанр</h2>
         <h2>Оценка</h2>
         <h2>Статус</h2>
@@ -27,7 +30,13 @@ export function Table({ mediaList }: TableProps) {
 
       {mediaList.length > 0 ? (
         mediaList.map((md, index) => (
-          <TableItem key={index} item={md}></TableItem>
+          <TableItem
+            onClick={() => onClick(md)}
+            key={index}
+            item={md}
+            handlerShow={onClick}
+            handlerDelete={handlerDelete}
+          ></TableItem>
         ))
       ) : (
         <div className="text-text-gray-2 font-medium text-4">Данных нет</div>

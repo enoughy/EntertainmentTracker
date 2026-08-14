@@ -1,7 +1,7 @@
 import { ContentStatus } from "@/types/content-status/content-status";
 import { StatusCardAnim } from "./status-card-anim";
 import { STATUS_COLORS } from "@/types/content-status/status-colors";
-import { TYPE_NAME } from "@/types/content-status/content-status-name";
+import { STATUS_NAME } from "@/types/content-status/content-status-name";
 
 type StatusCardProps = {
   status: ContentStatus;
@@ -19,7 +19,7 @@ export function StatusCard({ status }: StatusCardProps) {
             className={`w-2 h-2 rounded-2xl bg-[var(--card-color)] mr-2`}
           ></div>
           <div className={`text-[14px] text-[var(--card-color)]`}>
-            {TYPE_NAME[status]}
+            {STATUS_NAME[status]}
           </div>
         </div>
       </StatusCardAnim>

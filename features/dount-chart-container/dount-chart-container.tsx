@@ -13,10 +13,10 @@ export function DountChartContainer({ data }: DountChartContainerProps) {
       <UpAnim>
         <Header className="mb-5"></Header>
       </UpAnim>
-      <div className="flex flex-col sm:flex-row items-center justify-between">
+      <div className="grid grid-cols-1 sm:grid-cols-3 items-center justify-between">
         <DountChart name="Аниме" stat={data[0]}></DountChart>
-        <DountChart name="Сериалы" stat={data[1]}></DountChart>
-        <DountChart name="Фильмы" stat={data[2]}></DountChart>
+        <DountChart name="Сериалы" stat={data[2]}></DountChart>
+        <DountChart name="Фильмы" stat={data[1]}></DountChart>
       </div>
     </div>
   );

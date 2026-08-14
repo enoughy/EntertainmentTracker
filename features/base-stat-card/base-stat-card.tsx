@@ -24,7 +24,7 @@ export function BaseStatCard({
   return (
     <BaseCard
       className={
-        "flex w-full second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between " +
+        "flex w-full mb-2 first:mb-0 second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between " +
         className
       }
     >

@@ -1,7 +1,7 @@
 import { Media } from "@/features/content/entity/media";
 import { NoImage } from "@/img/svg/no-image/no-image";
 import { ContentStatus } from "@/types/content-status/content-status";
-import { TYPE_NAME } from "@/types/content-status/content-status-name";
+import { STATUS_NAME } from "@/types/content-status/content-status-name";
 import { Star } from "lucide-react";
 
 type MediaCardProps = {
@@ -41,7 +41,7 @@ export function MediaCard({ title, onClick }: MediaCardProps) {
       </div>
       <div className="rounded-2xl text-card-text w-full text-[17px] font-medium">
         <div className="flex justify-between text-text-gray items-center">
-          <p className="">{TYPE_NAME[title.contentStatus]}</p>
+          <p className="">{STATUS_NAME[title.contentStatus]}</p>
           <p className="text-[12px] text-text-main">
             {title.dateOfAdd.toLocaleDateString("ru-RU", options)}
           </p>
