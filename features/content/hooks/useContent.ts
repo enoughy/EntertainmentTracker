@@ -81,9 +81,12 @@ export function useContent() {
       }
       setMediaBlocks(mbList);
     });
-    service
-      .getContent()
-      .then((content) => setContent(content ?? contentDataInit()));
+    service.getContent().then((content) => {
+      if (content == null) {
+        service.addContent(contentDataInit());
+      }
+      setContent(content ?? contentDataInit());
+    });
   }, []);
   return {
     content,
@@ -98,4 +101,3 @@ export function useContent() {
 const deleteMovie = () => {
   return;
 };
-

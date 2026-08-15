@@ -1,11 +1,13 @@
 export class shiftBuff<T> {
   buffer: T[] = [];
   maxSize = 5;
-  constructor(sb?: shiftBuff<T>) {
-    if (sb === undefined) {
-      return;
+  constructor(sb?: shiftBuff<T>, list?: T[]) {
+    if (sb !== undefined) {
+      this.buffer = [...sb.buffer];
     }
-    this.buffer = [...sb.buffer];
+    if (list !== undefined) {
+      this.buffer = list;
+    }
   }
   push(item: T) {
     if (this.buffer.length >= this.maxSize) {
