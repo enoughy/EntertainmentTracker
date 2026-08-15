@@ -10,5 +10,9 @@ export async function getMediaById(id: number): Promise<Media | undefined> {
 }
 
 export function addMedia(md: Media) {
-  return db.media.put(md, md.id);
+  return db.media.put(md, md.id); // return id
+}
+
+export function deleteMedia(id: number) {
+  db.media.delete(id);
 }

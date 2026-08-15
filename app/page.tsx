@@ -11,6 +11,7 @@ import { MediaBlock } from "@/features/content/entity/mediaBlock";
 import { barChartDataMapper } from "@/features/bar-chart/barChartDataMapper";
 import { dountChartMapper } from "@/features/dount-chart-container/dountChartMappre";
 import { AddedRecently } from "@/features/added-recetnly/added-recently";
+import { Media } from "@/features/content/entity/media";
 
 import { SpringAnime } from "@/components/animations/spring-anim/spring-anim";
 import { PageInitAnim } from "@/components/animations/page-init-anim/page-init-anim";
@@ -20,7 +21,7 @@ export default function Home() {
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
   const [barChartData, setBarChartData] = useState<BarChartData>([]);
-  const { content, mediaBlocks } = useContent();
+  const { content, mediaBlocks, deleteMedia } = useContent();
 
   useEffect(() => {
     const currMediaBlockList = mediaBlocks ?? [];
@@ -32,7 +33,12 @@ export default function Home() {
     console.log(dChData);
     setDountCahrData(dChData);
     setBarChartData(barChartDataMapper(content!));
-  }, [mediaBlocks]);
+  }, [mediaBlocks, content]);
+
+  function handlerDelete(item: Media) {
+    deleteMedia(item.id!);
+    console.log("delete");
+  }
   return (
     <>
       <div className="p-4 first:p-12 text-text-gray text-[28px]">
@@ -68,6 +74,7 @@ export default function Home() {
             <div className="col-span-1 second:col-span-3 first:col-span-2">
               <AddedRecently
                 mediaList={content?.addedRecently.buffer ?? []}
+                handlerDelete={handlerDelete}
               ></AddedRecently>
             </div>
           </div>

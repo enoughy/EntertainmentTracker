@@ -39,7 +39,9 @@ export function Table({ mediaList, onClick, handlerDelete }: TableProps) {
           ></TableItem>
         ))
       ) : (
-        <div className="text-text-gray-2 font-medium text-4">Данных нет</div>
+        <div className="text-text-gray text-center font-medium text-4">
+          Данных нет
+        </div>
       )}
     </>
   );

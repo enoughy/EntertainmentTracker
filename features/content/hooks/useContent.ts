@@ -58,9 +58,13 @@ export function useContent() {
   // };
   //
   const deleteMedia = async (id: number) => {
-    service.deleteMedia(id);
+    await service.deleteMedia(id);
+
     service.getMediaBlocks().then((mbList) => {
       setMediaBlocks(mbList);
+    });
+    service.getContent().then((content) => {
+      setContent(content!);
     });
   };
 

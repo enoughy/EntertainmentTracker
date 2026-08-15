@@ -48,13 +48,19 @@ export function Menu({ handlerDelete, handlerShow }: MenuProps) {
         >
           <div className="bg-white rounded-2xl p-2 text-[12px]">
             <button
-              onClick={handlerShow}
+              onClick={(e) => {
+                e.stopPropagation();
+                handlerShow?.();
+              }}
               className="border-b border-gray-300 p-2 hover:bg-gray-100/20 last:border-none"
             >
               Посмотреть
             </button>
             <button
-              onClick={handlerDelete}
+              onClick={(e) => {
+                e.stopPropagation();
+                handlerDelete?.();
+              }}
               className="border-b w-full border-gray-300 p-2 hover:bg-gray-100/20 last:border-none"
             >
               Удалить

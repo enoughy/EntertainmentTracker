@@ -7,19 +7,16 @@ import { useState } from "react";
 
 type AddedRecently = {
   mediaList: Media[];
+  handlerDelete: (item: Media) => void;
 };
 
-export function AddedRecently({ mediaList }: AddedRecently) {
+export function AddedRecently({ mediaList, handlerDelete }: AddedRecently) {
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [selectMedia, setSelectMedia] = useState<Media>();
 
   function handleClick(item: Media) {
     setSelectMedia(item);
     setIsOpenCard(true);
-  }
-
-  function handlerDelete(item: Media) {
-    console.log(item.name);
   }
 
   const handleUpdateMovie = (updatedMovie: Media) => {};

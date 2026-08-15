@@ -78,6 +78,10 @@ export async function deleteMedia(id: number) {
     currentCountInMonth - 1,
   );
 
+  content.addedRecently.buffer = content.addedRecently.buffer.filter(
+    (md) => md.id != id,
+  );
+
   contentRepository.storeContent(content);
 
   let mb = await mediaBlockRepository.getMediaBlockByType(title.contentType);
@@ -96,6 +100,7 @@ export async function deleteMedia(id: number) {
 
   mb!.mediaList = mb!.mediaList.filter((item) => item.id !== id);
   mediaBlockRepository.storeMediaBlock(mb!);
+  mediaRepository.deleteMedia(id);
 }
 
 export async function changeMedia(id: number, newTitle: Media) {
