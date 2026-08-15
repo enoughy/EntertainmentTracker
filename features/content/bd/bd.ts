@@ -11,13 +11,13 @@
 
 import Dexie, { Table } from "dexie";
 import { Media } from "../entity/media";
-import { MediaBlock, MediaBlockRecord } from "../entity/mediaBlock";
-import { ContentData } from "../entity/ContentData";
+import { MediaBlockRecord } from "../entity/mediaBlock";
+import { ContentDataRecord } from "../entity/ContentData";
 
 export class AppDB extends Dexie {
   media!: Table<Media>;
   mediaBlock!: Table<MediaBlockRecord>;
-  content!: Table<ContentData>;
+  content!: Table<ContentDataRecord>;
 
   constructor() {
     super("AppDB");

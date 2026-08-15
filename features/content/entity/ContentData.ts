@@ -10,3 +10,9 @@ export interface ContentData {
   addedRecently: shiftBuff<Media>;
   countAddedInMonths: Map<Months, number>;
 }
+
+export interface ContentDataRecord {
+  id: number;
+  addedRecently: shiftBuff<number>;
+  countAddedInMonths: Map<Months, number>;
+}

@@ -17,16 +17,12 @@ export async function addMedia(title: Media) {
 
   content.addedRecently = new shiftBuff(content.addedRecently);
 
-  content.addedRecently.push(title);
-
   let currentCountInMonth =
     content.countAddedInMonths.get(MONTHS_MAP[title.dateOfAdd.getMonth()]) || 0;
   content.countAddedInMonths.set(
     MONTHS_MAP[title.dateOfAdd.getMonth()],
     currentCountInMonth + 1,
   );
-
-  contentRepository.storeContent(content);
 
   let mb = await mediaBlockRepository.getMediaBlockByType(title.contentType);
 
@@ -53,6 +49,10 @@ export async function addMedia(title: Media) {
   const mbCurrentStat = mb.contentStatusStatistic.get(title.contentStatus) || 0;
   mb.contentStatusStatistic.set(title.contentStatus, mbCurrentStat + 1);
   title.id = await mediaRepository.addMedia(title);
+
+  content.addedRecently.push(title);
+
+  contentRepository.storeContent(content);
 
   mb.mediaList.push(title);
 
@@ -131,4 +131,7 @@ export async function getMediaBlocks(): Promise<MediaBlock[] | undefined> {
 
 export async function getContent() {
   return contentRepository.getContent();
+}
+export async function addContent(content: ContentData) {
+  contentRepository.storeContent(content);
 }
