@@ -19,7 +19,7 @@ type TableProps = {
 export function Table({ mediaList, onClick, handlerDelete }: TableProps) {
   return (
     <>
-      <div className="grid grid-cols-[7fr_6fr_6fr_4fr_6fr_1fr] text-text-gray-2 text-[14px]  mb-3 ">
+      <div className="grid grid-cols-[7fr_6fr_6fr_4fr_7fr_1fr] text-text-gray-2 text-[14px]  mb-3 ">
         <h2>Название</h2>
         <h2>Тип</h2>
         <h2>Жанр</h2>

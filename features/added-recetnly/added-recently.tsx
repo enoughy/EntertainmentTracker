@@ -8,9 +8,14 @@ import { useState } from "react";
 type AddedRecently = {
   mediaList: Media[];
   handlerDelete: (item: Media) => void;
+  handleUpdate: (item: Media) => void;
 };
 
-export function AddedRecently({ mediaList, handlerDelete }: AddedRecently) {
+export function AddedRecently({
+  mediaList,
+  handlerDelete,
+  handleUpdate,
+}: AddedRecently) {
   const [isOpenCard, setIsOpenCard] = useState(false);
   const [selectMedia, setSelectMedia] = useState<Media>();
 
@@ -18,8 +23,6 @@ export function AddedRecently({ mediaList, handlerDelete }: AddedRecently) {
     setSelectMedia(item);
     setIsOpenCard(true);
   }
-
-  const handleUpdateMovie = (updatedMovie: Media) => {};
 
   return (
     <>
@@ -38,7 +41,7 @@ export function AddedRecently({ mediaList, handlerDelete }: AddedRecently) {
         isOpenCard={isOpenCard}
         setIsOpenCard={setIsOpenCard}
         movie={selectMedia!}
-        onUpdate={handleUpdateMovie}
+        onUpdate={handleUpdate}
       ></ModalMediaViewer>
     </>
   );

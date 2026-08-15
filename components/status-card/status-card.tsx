@@ -11,15 +11,17 @@ export function StatusCard({ status }: StatusCardProps) {
   return (
     <div className="inline-flex">
       <StatusCardAnim>
-        <div
-          style={{ "--card-color": cardColor } as React.CSSProperties}
-          className={`inline-flex justify-between items-center rounded-3xl py-1 px-3 bg-[var(--card-color)]/10 hover:bg-[var(--card-color)]/20 transition-colors duration-150 max-w-36`}
-        >
+        <div className="bg-white rounded-3xl">
           <div
-            className={`w-2 h-2 rounded-2xl bg-[var(--card-color)] mr-2`}
-          ></div>
-          <div className={`text-[14px] text-[var(--card-color)]`}>
-            {STATUS_NAME[status]}
+            style={{ "--card-color": cardColor } as React.CSSProperties}
+            className={`inline-flex justify-between items-center rounded-3xl py-1 px-3 bg-[var(--card-color)]/10 hover:bg-[var(--card-color)]/20 transition-colors duration-150 max-w-55`}
+          >
+            <div
+              className={`w-2 h-2 rounded-2xl bg-[var(--card-color)] mr-2`}
+            ></div>
+            <div className={`text-[14px] text-[var(--card-color)]`}>
+              {STATUS_NAME[status]}
+            </div>
           </div>
         </div>
       </StatusCardAnim>

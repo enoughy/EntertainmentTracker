@@ -21,7 +21,7 @@ export default function Home() {
   const [mediaBlockList, setMediaBlockList] = useState<MediaBlock[]>([]);
   const [dountChartData, setDountCahrData] = useState<DountChartData[]>([]);
   const [barChartData, setBarChartData] = useState<BarChartData>([]);
-  const { content, mediaBlocks, deleteMedia } = useContent();
+  const { content, mediaBlocks, deleteMedia, changeMedia } = useContent();
 
   useEffect(() => {
     const currMediaBlockList = mediaBlocks ?? [];
@@ -38,6 +38,10 @@ export default function Home() {
   function handlerDelete(item: Media) {
     deleteMedia(item.id!);
     console.log("delete");
+  }
+
+  function handleUpdate(updatedMovie: Media) {
+    changeMedia(updatedMovie.id!, updatedMovie);
   }
   return (
     <>
@@ -75,6 +79,7 @@ export default function Home() {
               <AddedRecently
                 mediaList={content?.addedRecently.buffer ?? []}
                 handlerDelete={handlerDelete}
+                handleUpdate={handleUpdate}
               ></AddedRecently>
             </div>
           </div>
