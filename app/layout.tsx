@@ -8,6 +8,7 @@ import "./globals.css";
 import backgroundImage from "@/public/pawel-czerwinski-95QNbCkVERM-unsplash.jpg";
 
 import { Manrope } from "next/font/google";
+import { PageNav } from "@/features/page-nav/page-nav";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -54,7 +55,8 @@ export default function RootLayout({
 
         <div className="z-10 max-w-[1440px] md:h-[95vh] mx-auto flex  md:rounded-4xl overflow-hidden  shadow-[0_40px_120px_rgba(0,0,0,0.15)]">
           <Nav />
-          <main className="mx-auto overflow-y-auto [scrollbar-width:none]  bg-[var(--background)]/92">
+          <main className="mx-auto overflow-y-auto [scrollbar-width:none]  bg-[var(--background)]/92 py-3 ">
+            <PageNav></PageNav>
             {children}
             {/* <div className="absolute -top-15 -right-15 bg-radial blur-2xl from-[#ecb7b7]/50 to-[#ecb7b7]/73 rounded-[50px] w-50 h-50 z-1000"></div> */}
           </main>
