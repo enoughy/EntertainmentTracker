@@ -8,6 +8,7 @@ import { useDropzone } from "react-dropzone";
 import { Media } from "@/features/content/entity/media";
 import { Download } from "@/img/download/download";
 import { ContentType } from "@/types/content-type/contentType";
+import { useForm } from "react-hook-form";
 type ModalMediaEditorProps = {
   isOpen: boolean;
   setIsOpen: Function;
@@ -21,56 +22,57 @@ export function ModalMediaEditor({
   addMedia,
   type,
 }: ModalMediaEditorProps) {
-  const [title, setTitle] = useState("");
-  const [genre, setGenre] = useState("");
-  const [rating, setRating] = useState("");
-  const [status, setStatus] = useState<ContentStatus>("favorite");
   const [coverImgPath, setCoverImgPath] = useState<string>();
   const [coverImg, setCoverImg] = useState<File>();
-
-  async function addTitle() {
+  const [adInfCount, setAdInfCount] = useState(1);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  async function addTitle(data: any) {
     if (
-      !title.trim() ||
-      !genre.trim() ||
-      !rating.trim() ||
-      !status.trim() ||
+      !data.title.trim() ||
+      !data.genre.trim() ||
+      !data.rating.trim() ||
+      !data.status.trim() ||
       coverImgPath == null
     ) {
       alert("Заполните все поля");
       return;
     }
 
-    const numRating = Number(rating);
+    const numRating = Number(data.rating);
     if (numRating < 1 || numRating > 10) {
       alert("Рейтинг должен быть от 1 до 10");
       return;
     }
 
     const anime: Media = {
-      name: title,
-      genres: genre.split(",").map((g) => g.trim()),
+      name: data.title,
+      genres: data.genre.split(",").map((g: string) => g.trim()),
       rate: numRating as Rate,
       contentType: type,
-      contentStatus: status,
+      contentStatus: data.status,
       dateOfAdd: new Date(),
       imgFile: coverImg,
+      dateOfMedia: data.dateOfMedia,
+      discription: data.discription,
+      adictInf: [{ name: data.adInfName, text: data.adInfText }],
     };
-    console.log(anime);
 
+    console.log(anime);
     await addMedia(anime);
 
-    setTitle("");
-    setGenre("");
-    setRating("");
-    setStatus("favorite");
     setCoverImgPath(undefined);
     setCoverImg(undefined);
 
     setIsOpen(false);
+    reset();
   }
 
   const onDrop = useCallback((acceptedFiles: any) => {
-    console.log(acceptedFiles);
     const file = acceptedFiles[0];
     setCoverImgPath(URL.createObjectURL(file));
     setCoverImg(file);
@@ -93,16 +95,13 @@ export function ModalMediaEditor({
         <button
           onClick={() => {
             setIsOpen(false);
-            setTitle("");
-            setGenre("");
-            setRating("");
           }}
           className="cursor-pointer closeBtn"
         >
           <X />
         </button>
       </div>
-      <div className="inputContainer">
+      <form onSubmit={handleSubmit(addTitle)} className="inputContainer">
         <div className="grid grid-cols-2 gap-x-7">
           {/* Drop Container */}
           <div
@@ -134,41 +133,60 @@ export function ModalMediaEditor({
             )}
           </div>
 
-          <div>
+          <div className="overflow-scroll">
             <label>Название: </label>
             <input
+              {...register("title", { required: "Введите название" })}
               className="inputField"
               type="text"
               placeholder="Название..."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
               required
             />
             <br />
             <label>Жанр: </label>
             <input
+              {...register("genre", { required: "Введите жанры" })}
               className="inputField"
               type="text"
               placeholder="экшен..."
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
               required
             />
             <br />
+            <label>Описание: </label>
+            <input
+              {...register("discription", { required: "Введите Описание" })}
+              className="inputField"
+              type="text"
+              placeholder="..."
+              required
+            />
+            <br />
+            <label>Дата создания: </label>
+            <input
+              {...register("dateOfMedia", { required: "Введите дату" })}
+              className="inputField"
+              type="date"
+              placeholder="..."
+              required
+            />
+            <br />
+
             <label>Ваша оценка от 1 до 10: </label>
             <input
+              {...register("rating", {
+                required: "Введите оценку",
+                validate: (value) =>
+                  (value >= 1 && value <= 10) || "От 1 до 10",
+              })}
               className="inputField"
               type="number"
               placeholder="9"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
               required
             />
             <label>Статус: </label>
             <select
+              {...register("status", { required: "Выберите статус" })}
               className="w-full rounded-[4px] border border-slate-200 h-min-[40px] px-4 py-3 text-sm placeholder-slate-400 outline-none transition-all focus:border-indigo-600"
-              onChange={(e) => setStatus(e.target.value as ContentStatus)}
-              value={status}
             >
               <option value="favorite" className="text-[#ff6787]">
                 Любимое
@@ -186,18 +204,45 @@ export function ModalMediaEditor({
                 Брошено
               </option>
             </select>
+            <label>Дополнительная информация: </label>
+            <br />
+            <label>Название блока: </label>
+            <input
+              {...register("adInfName", { required: "Введите Описание" })}
+              className="inputField"
+              type="text"
+              placeholder="..."
+              required
+            />
+            <br />
+            <label>Информация: </label>
+            <input
+              {...register("adInfText", { required: "Введите Описание" })}
+              className="inputField"
+              type="text"
+              placeholder="..."
+              required
+            />
+            <br />
+            <button
+              onClick={() => setAdInfCount(adInfCount + 1)}
+              className="button hidden"
+            >
+              +
+            </button>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center">
-        <button
-          // className="cursor-pointer bg-[lightgray] p-[7px] rounded-[10px] border 2border-[gray] addBtn"
-          className="mt-5 button"
-          onClick={addTitle}
-        >
-          Добавить
-        </button>
-      </div>
+
+        <div className="flex justify-center">
+          <button
+            // className="cursor-pointer bg-[lightgray] p-[7px] rounded-[10px] border 2border-[gray] addBtn"
+            type="submit"
+            className="mt-5 button"
+          >
+            Добавить
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 }
