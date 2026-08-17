@@ -2,6 +2,11 @@ import { Rate } from "@/types/rate/rate";
 import { ContentStatus } from "@/types/content-status/content-status";
 import { ContentType } from "@/types/content-type/contentType";
 
+export interface AdictInfo {
+  name: string;
+  text: string;
+}
+
 export interface Media {
   id?: number;
   name: string;
@@ -11,4 +16,8 @@ export interface Media {
   contentType: ContentType;
   contentStatus: ContentStatus;
   dateOfAdd: Date;
+  dateOfMedia?: Date;
+  discription?: string;
+  tags?: string[];
+  adictInf?: AdictInfo[];
 }
