@@ -129,7 +129,7 @@ export default function ModalMediaViewer({
                     : movie.contentType === "series"
                       ? "Сериал"
                       : "Аниме"}
-                  {movie.dateOfAdd.getDate()}
+                  {new Date(movie.dateOfMedia ?? "").getFullYear()}
                 </p>
 
                 {/* title */}
@@ -145,9 +145,8 @@ export default function ModalMediaViewer({
                   {/* Description */}
                   <div className="mt-1">
                     <p className="text-xs text-black/55 mb-2">Описание</p>
-                    <p className="text-sm text-black/80 leading-relaxed">
-                      Тут будет краткое описание. Пока просто пример текста,
-                      чтобы показать как будет выглядеть блок.
+                    <p className="text-sm text-black/80 leading-relaxed min-h-10">
+                      {movie.discription}
                     </p>
                   </div>
                   {/* Genres as separate chips */}
