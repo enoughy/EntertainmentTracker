@@ -1,18 +1,19 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import { ModalMediaEditor } from "../../../features/modal-media-editor/modal-media-editor";
 import { useContent } from "@/features/content/hooks/useContent";
 import { Media } from "@/features/content/entity/media";
 import Plus from "@/components/icons/plus";
-import { ModalMediaEditor } from "../../features/modal-media-editor/modal-media-editor";
-import { MediaCard } from "../../features/media-card/media-card";
-import ModalMediaViewer from "../../features/modal-card-info/modal-card-info";
+import { MediaCard } from "../../../features/media-card/media-card";
+import ModalMediaViewer from "../../../features/modal-card-info/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
-  const { content, mediaBlocks, addMedia } = useContent();
-  const [series, setSeries] = useState<Media[]>([]);
-  const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
+  const { content, mediaBlocks, addMedia, deleteMedia } = useContent();
   const [isOpenCard, setIsOpenCard] = useState(false);
+  const [movies, setMovies] = useState<Media[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
 
   useEffect(() => {
     if (mediaBlocks) {
@@ -22,12 +23,12 @@ export default function Movie() {
           allMedia.push(...block.mediaList);
         }
       });
-      const filteredSeries = allMedia.filter(
-        (item) => item.contentType === "series",
+      const filteredMovies = allMedia.filter(
+        (item) => item.contentType === "film",
       );
 
-      if (filteredSeries.length !== series.length) {
-        setSeries(filteredSeries);
+      if (filteredMovies.length !== movies.length) {
+        setMovies(filteredMovies);
       }
     }
   }, [content, mediaBlocks]);
@@ -38,18 +39,24 @@ export default function Movie() {
   };
 
   const handleUpdateMovie = (updatedMovie: Media) => {
-    setSeries((prevMovies) =>
+    setMovies((prevMovies) =>
       prevMovies.map((movie) =>
         movie === selectedMovie ? updatedMovie : movie,
       ),
     );
   };
+  const handleDelete = (deletedMedia: Media) => {
+    deleteMedia(deletedMedia.id!);
+  };
 
   return (
     <>
       <div className="flex justify-center items-center mb-[50px] mt-[30px] pageInfo">
-        <h2 className="mr-[30px]">Мои Сериалы</h2>
-        <button onClick={() => setIsOpen(true)} className="button flex gap-2">
+        <h2 className="mr-[30px]">Мои фильмы</h2>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex button justify-between"
+        >
           <Plus />
           Добавить
         </button>
@@ -59,10 +66,11 @@ export default function Movie() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         addMedia={addMedia}
-        type={"series"}
+        type={"film"}
       ></ModalMediaEditor>
 
       <ModalMediaViewer
+        onDelete={handleDelete}
         isOpenCard={isOpenCard}
         setIsOpenCard={setIsOpenCard}
         movie={selectedMovie}
@@ -71,10 +79,10 @@ export default function Movie() {
 
       <div className="">
         <div className="gap-[20px] grid grid-cols-5 p-4">
-          {series.length === 0 ? (
-            <p className="noneText">Сериалов пока нет</p>
+          {movies.length === 0 ? (
+            <p className="noneText">Фильмов пока нет</p>
           ) : (
-            series.map((movie, index) => (
+            movies.map((movie, index) => (
               <MediaCard
                 key={index}
                 title={movie}

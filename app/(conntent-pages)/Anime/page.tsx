@@ -1,21 +1,22 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import { Modal } from "@/components/modal/modal";
-import X from "@/components/icons/x";
-import { setDataStartEndIndexes } from "recharts/types/state/chartDataSlice";
-import { ModalMediaEditor } from "../../features/modal-media-editor/modal-media-editor";
+import { ModalMediaEditor } from "../../../features/modal-media-editor/modal-media-editor";
 import { useContent } from "@/features/content/hooks/useContent";
 import { Media } from "@/features/content/entity/media";
 import Plus from "@/components/icons/plus";
-import { ContentStatus } from "@/types/content-status/content-status";
-import { MediaCard } from "../../features/media-card/media-card";
-import ModalMediaViewer from "../../features/modal-card-info/modal-card-info";
+import { MediaCard } from "../../../features/media-card/media-card";
+import ModalMediaViewer from "../../../features/modal-card-info/modal-card-info";
 
 export default function Movie() {
   const [isOpen, setIsOpen] = useState(false);
-  const { content, mediaBlocks, changeMedia, getMediaBlocks, addMedia } =
-    useContent();
+  const {
+    content,
+    mediaBlocks,
+    changeMedia,
+    getMediaBlocks,
+    addMedia,
+    deleteMedia,
+  } = useContent();
   const [anime, setAnime] = useState<Media[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Media | null>(null);
   const [isOpenCard, setIsOpenCard] = useState(false);
@@ -46,6 +47,9 @@ export default function Movie() {
   const handleUpdateMovie = (updatedMovie: Media) => {
     changeMedia(updatedMovie.id!, updatedMovie);
   };
+  const handleDelete = (deletedMedia: Media) => {
+    deleteMedia(deletedMedia.id!);
+  };
 
   return (
     <>
@@ -72,6 +76,7 @@ export default function Movie() {
         setIsOpenCard={setIsOpenCard}
         movie={selectedMovie}
         onUpdate={handleUpdateMovie}
+        onDelete={handleDelete}
       ></ModalMediaViewer>
 
       <div className="">

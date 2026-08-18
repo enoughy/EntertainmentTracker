@@ -1,7 +1,7 @@
 import { StatusCard } from "@/components/status-card/status-card";
 import { Media } from "@/features/content/entity/media";
 import { TYPE_NAME } from "@/types/content-type/contentTypeNameTable";
-import { Menu } from "./menu";
+import { Menu } from "../../../component/menu/menu";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 
 type TableItemProps = {

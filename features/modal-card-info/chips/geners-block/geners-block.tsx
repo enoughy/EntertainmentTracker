@@ -5,8 +5,8 @@ export function GenersBlock({ genres }: { genres: string[] }) {
     <div className="mb-3">
       <p className="text-xs text-black/55 mb-2">Жанры</p>
       <div className="flex flex-wrap gap-2 ">
-        {genres.map((g) => (
-          <Chips key={g}>{g}</Chips>
+        {genres.map((g, index) => (
+          <Chips key={index}>{g}</Chips>
         ))}
       </div>
     </div>

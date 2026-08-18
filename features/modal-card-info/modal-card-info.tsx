@@ -8,14 +8,16 @@ import { GenersBlock } from "./chips/geners-block/geners-block";
 import { TextBlock } from "./adict-text-block/text-block";
 import { UpAnim } from "@/components/animations/up-anim/up-anim";
 import { FaRegStar } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
 import { Header } from "./header/header";
+import { useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
 
 interface ModalMediaViewerProps {
   isOpenCard: boolean;
   setIsOpenCard: (isOpen: boolean) => void;
   movie: Media | null;
   onUpdate: (updatedMovie: Media) => void;
+  onDelete: (deletedMedia: Media) => void;
 }
 
 export default function ModalMediaViewer({
@@ -23,30 +25,22 @@ export default function ModalMediaViewer({
   setIsOpenCard,
   movie,
   onUpdate,
+  onDelete,
 }: ModalMediaViewerProps) {
-  const [rate, setRate] = useState(movie?.rate ?? 1);
-  const [status, setStatus] = useState(movie?.contentStatus ?? "favorite");
-  const [name, setName] = useState(movie?.name ?? "");
   const [sectionId, setSectionId] = useState(0);
-
-  useEffect(() => {
-    if (movie) {
-      setRate(movie.rate);
-      setStatus(movie.contentStatus);
-      setName(movie.name);
-    }
-  }, [movie]);
+  const { register, handleSubmit, reset } = useForm();
 
   if (!movie) return null;
 
-  const save = () => {
+  const save = (data: any) => {
     if (!movie) return null;
 
     const updatedMovie: Media = {
       ...movie,
-      name: name,
-      rate: rate,
-      contentStatus: status,
+      name: data.name ?? movie.name,
+      rate: data.rate ?? movie.rate,
+      discription: data.discription ?? movie.discription,
+      contentStatus: data.status ?? movie.contentStatus,
     };
 
     onUpdate(updatedMovie);
@@ -55,29 +49,24 @@ export default function ModalMediaViewer({
   };
 
   const cancel = () => {
-    if (movie) {
-      setRate(movie.rate);
-      setStatus(movie.contentStatus);
-      setName(movie.name);
-    }
-
     setIsOpenCard(false);
+    reset();
   };
 
   return (
     <Modal isOpen={isOpenCard}>
-      <div className="min-h-220">
-        {/* Header close button */}
-        <div className="flex items-center justify-end mt-4">
-          <button
-            onClick={() => setIsOpenCard(false)}
-            className="cursor-pointer rounded-xl p-2 transition-colors duration-200 hover:bg-black/5"
-            aria-label="Закрыть"
-          >
-            <X />
-          </button>
-        </div>
+      {/* Header close button */}
+      <div className="flex items-center justify-end ">
+        <button
+          onClick={cancel}
+          className="cursor-pointer rounded-xl p-2 transition-colors duration-200 hover:bg-black/5"
+          aria-label="Закрыть"
+        >
+          <X />
+        </button>
+      </div>
 
+      <form onSubmit={handleSubmit(save)} className="min-h-220 mt-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
           {/* Left: Image */}
           <UpAnim>
@@ -100,7 +89,8 @@ export default function ModalMediaViewer({
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-xs text-black/60">Статус</p>
                     <p className="text-sm font-semibold text-black/85">
-                      {STATUS_NAME?.[status] ?? status}
+                      {STATUS_NAME?.[movie.contentStatus] ??
+                        movie.contentStatus}
                     </p>
                   </div>
 
@@ -108,7 +98,7 @@ export default function ModalMediaViewer({
                     <p className="text-xs text-black/60">Оценка</p>
                     <p className="text-xl font-semibold text-black/85 flex">
                       <FaRegStar className="mr-1"></FaRegStar>
-                      {rate}
+                      {movie.rate}
                     </p>
                   </div>
                 </div>
@@ -119,7 +109,11 @@ export default function ModalMediaViewer({
           {/* Right: Info (view-like) */}
 
           <div className="flex-1">
-            <Header sectionId={sectionId} setSectionId={setSectionId}></Header>
+            <Header
+              handlerDelete={() => onDelete(movie)}
+              sectionId={sectionId}
+              setSectionId={setSectionId}
+            ></Header>
             {/* Title + small meta */}
             <div className="flex flex-col gap-3">
               <div>
@@ -134,9 +128,9 @@ export default function ModalMediaViewer({
 
                 {/* title */}
                 <input
+                  defaultValue={movie.name}
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  {...register("name")}
                   className="w-full bg-transparent text-2xl sm:text-3xl font-semibold outline-none border-none p-0"
                 />
               </div>
@@ -145,9 +139,13 @@ export default function ModalMediaViewer({
                   {/* Description */}
                   <div className="mt-1">
                     <p className="text-xs text-black/55 mb-2">Описание</p>
-                    <p className="text-sm text-black/80 leading-relaxed min-h-10">
-                      {movie.discription}
-                    </p>
+                    <TextareaAutosize
+                      minRows={1}
+                      maxRows={5}
+                      defaultValue={movie.discription}
+                      {...register("discription")}
+                      className=" resize-none text-sm text-black/80 leading-relaxed min-h-10 border-none outline-none bg-transparent w-full"
+                    ></TextareaAutosize>
                   </div>
                   {/* Genres as separate chips */}
                   <GenersBlock genres={movie.genres}></GenersBlock>
@@ -164,6 +162,11 @@ export default function ModalMediaViewer({
                       Дополнительная информация
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {movie.adictInf?.map(({ name, text }, index) => (
+                        <TextBlock key={index} name={name}>
+                          {text}
+                        </TextBlock>
+                      ))}
                       <TextBlock name="Neweest">Период</TextBlock>
 
                       <TextBlock name="Выпуск">Продолжается</TextBlock>
@@ -200,19 +203,15 @@ export default function ModalMediaViewer({
                 Отмена
               </button>
               <button
+                type="submit"
                 className="bg-black text-white p-[8px] rounded-[14px] cursor-pointer transition-colors hover:bg-black/90"
-                onClick={() => {
-                  rate <= 10 && rate > 1
-                    ? save()
-                    : alert("Рейтинг должен быть то 1 до 10 ulululu");
-                }}
               >
                 Сохранить
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </Modal>
   );
 }

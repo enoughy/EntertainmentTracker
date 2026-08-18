@@ -48,7 +48,12 @@ export function ModalMediaEditor({
       alert("Рейтинг должен быть от 1 до 10");
       return;
     }
-
+    let i = 0;
+    const arr = [];
+    while (data[`adInfName${i}`] != null) {
+      arr.push({ name: data[`adInfName${i}`], text: data[`adInfText${i}`] });
+      i++;
+    }
     const anime: Media = {
       name: data.title,
       genres: data.genre.split(",").map((g: string) => g.trim()),
@@ -59,7 +64,7 @@ export function ModalMediaEditor({
       imgFile: coverImg,
       dateOfMedia: data.dateOfMedia,
       discription: data.discription,
-      adictInf: [{ name: data.adInfName, text: data.adInfText }],
+      adictInf: arr,
     };
 
     console.log(anime);
@@ -206,27 +211,35 @@ export function ModalMediaEditor({
             </select>
             <label>Дополнительная информация: </label>
             <br />
-            <label>Название блока: </label>
-            <input
-              {...register("adInfName", { required: "Введите Описание" })}
-              className="inputField"
-              type="text"
-              placeholder="..."
-              required
-            />
-            <br />
-            <label>Информация: </label>
-            <input
-              {...register("adInfText", { required: "Введите Описание" })}
-              className="inputField"
-              type="text"
-              placeholder="..."
-              required
-            />
-            <br />
+            {Array.from({ length: adInfCount }).map((_, index) => (
+              <div key={index}>
+                <label>Название блока: </label>
+                <input
+                  {...register(`adInfName${index}`, {
+                    required: "Введите Описание",
+                  })}
+                  className="inputField"
+                  type="text"
+                  placeholder="..."
+                  required
+                />
+                <br />
+                <label>Информация: </label>
+                <input
+                  {...register(`adInfText${index}`, {
+                    required: "Введите Описание",
+                  })}
+                  className="inputField"
+                  type="text"
+                  placeholder="..."
+                  required
+                />
+                <br />
+              </div>
+            ))}
             <button
               onClick={() => setAdInfCount(adInfCount + 1)}
-              className="button hidden"
+              className="button"
             >
               +
             </button>
