@@ -123,7 +123,8 @@ export default function ModalMediaViewer({
                     : movie.contentType === "series"
                       ? "Сериал"
                       : "Аниме"}
-                  {new Date(movie.dateOfMedia ?? "").getFullYear()}
+                  {" Год выхода: " +
+                    new Date(movie.dateOfMedia ?? "").getFullYear()}
                 </p>
 
                 {/* title */}
