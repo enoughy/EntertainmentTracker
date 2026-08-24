@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <>
       <div className="p-4 first:p-12 text-text-gray text-[28px]">
-        <h1 className="mb-10 text">Статистика трекера</h1>
+        <h1 className="mb-10 text dark:text-[rgba(255,255,255,0.8)]">Статистика трекера</h1>
         <PageInitAnim>
           <div className="grid grid-cols-1 second:justify-items-normal first:justify-items-normal first:grid-cols-2 second:grid-cols-3 gap-y-7 ">
             <div className="col-span-1 first:col-span-2 second:col-span-3 grid grid-cols-1 first:grid-cols-1 second:grid-cols-3">

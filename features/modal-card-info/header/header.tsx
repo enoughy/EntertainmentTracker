@@ -15,7 +15,7 @@ export function Header({
       <div className="flex justify-start gap-5 text-sm rounded- px-2 ">
         <h1
           onClick={() => setSectionId(0)}
-          className="px-1 rounded cursor-pointer transition-colors duration-200"
+          className="px-1 rounded cursor-pointer transition-colors duration-200 dark:text-white"
           style={
             sectionId === 0
               ? { borderBottom: "4px solid var(--color-text-primary)" }
@@ -25,7 +25,7 @@ export function Header({
           Тайтл
         </h1>
         <h1
-          className="px-1 rounded cursor-pointer transition-colors duration-200"
+          className="px-1 rounded cursor-pointer transition-colors duration-200 dark:text-white"
           style={
             sectionId === 1
               ? { borderBottom: "4px solid var(--color-text-primary)" }

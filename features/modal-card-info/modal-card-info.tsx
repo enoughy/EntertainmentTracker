@@ -59,7 +59,7 @@ export default function ModalMediaViewer({
       <div className="flex items-center justify-end ">
         <button
           onClick={cancel}
-          className="cursor-pointer rounded-xl p-2 transition-colors duration-200 hover:bg-black/5"
+          className="cursor-pointer rounded-xl p-2 transition-colors duration-200 hover:bg-black/5 dark:text-white/80 dark:hover:bg-white/10"
           aria-label="Закрыть"
         >
           <X />
@@ -85,18 +85,18 @@ export default function ModalMediaViewer({
                 )}
 
                 {/* Status + Rating under image */}
-                <div className="p-4 flex flex-col gap-2 border-t border-black/5 bg-white">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-xs text-black/60">Статус</p>
-                    <p className="text-sm font-semibold text-black/85">
+                <div className="p-4 flex flex-col gap-2 border-t border-black/5 bg-white dark:bg-[#3e4147]">
+                  <div className="flex items-center justify-between gap-3 ">
+                    <p className="text-xs text-black/60 dark:text-white/80">Статус</p>
+                    <p className="text-sm font-semibold text-black/85 dark:text-white">
                       {STATUS_NAME?.[movie.contentStatus] ??
                         movie.contentStatus}
                     </p>
                   </div>
 
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-xs text-black/60">Оценка</p>
-                    <p className="text-xl font-semibold text-black/85 flex">
+                    <p className="text-xs text-black/60 dark:text-white/80">Оценка</p>
+                    <p className="text-xl font-semibold text-black/85 flex dark:text-white">
                       <FaRegStar className="mr-1"></FaRegStar>
                       {movie.rate}
                     </p>
@@ -116,8 +116,8 @@ export default function ModalMediaViewer({
             ></Header>
             {/* Title + small meta */}
             <div className="flex flex-col gap-3">
-              <div>
-                <p className="text-xs text-black/55 mb-1">
+              <div className="dark:text-white">
+                <p className="text-xs text-black/55 mb-1 dark:text-white">
                   {movie.contentType === "film"
                     ? "Фильм"
                     : movie.contentType === "series"
@@ -131,34 +131,34 @@ export default function ModalMediaViewer({
                   defaultValue={movie.name}
                   type="text"
                   {...register("name")}
-                  className="w-full bg-transparent text-2xl sm:text-3xl font-semibold outline-none border-none p-0"
+                  className="w-full bg-transparent text-2xl sm:text-3xl font-semibold outline-none border-none p-0 "
                 />
               </div>
               {sectionId === 0 ? (
                 <>
                   {/* Description */}
                   <div className="mt-1">
-                    <p className="text-xs text-black/55 mb-2">Описание</p>
+                    <p className="text-xs text-black/55 mb-2 dark:text-white">Описание</p>
                     <TextareaAutosize
                       minRows={1}
                       maxRows={5}
                       defaultValue={movie.discription}
                       {...register("discription")}
-                      className=" resize-none text-sm text-black/80 leading-relaxed min-h-10 border-none outline-none bg-transparent w-full"
+                      className=" resize-none text-sm text-black/80 leading-relaxed min-h-10 border-none outline-none bg-transparent w-full dark:text-white"
                     ></TextareaAutosize>
                   </div>
                   {/* Genres as separate chips */}
                   <GenersBlock genres={movie.genres}></GenersBlock>
                   {/* Creator */}
-                  <div className="flex justify-start pr-5">
-                    <h3 className="text-sm font-bold text-text-main mb-2 mr-10">
+                  <div className="flex justify-start pr-5 dark:text-white">
+                    <h3 className="text-sm font-bold text-text-main mb-2 mr-10 dark:text-white">
                       Создатели:
                     </h3>
                     <p>лалаал</p>
                   </div>
                   {/* info grid */}
                   <div className="mt-1">
-                    <p className="inline-flex text-xs text-black/55 mb-2 border-b-3 border-text-primary/40 pb-1">
+                    <p className="inline-flex text-xs text-black/55 mb-2 border-b-3 border-text-primary/40 pb-1 dark:text-white">
                       Дополнительная информация
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -189,7 +189,7 @@ export default function ModalMediaViewer({
               ) : (
                 <></>
               )}
-              <p className="text-xs text-black/55 mt-3">
+              <p className="text-xs text-black/55 mt-3 dark:text-white/60">
                 Добавлено: {movie.dateOfAdd.toLocaleDateString("ru-RU")}
               </p>
             </div>
@@ -197,7 +197,7 @@ export default function ModalMediaViewer({
             {/* Footer buttons */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-end mt-5">
               <button
-                className="border border-black/[0.2] p-[8px] rounded-[14px] cursor-pointer transition-colors hover:bg-black/5"
+                className="border border-black/[0.2] p-[8px] rounded-[14px] cursor-pointer transition-colors hover:bg-black/5 dark:bg-[#484b4f] dark:border-black/80 dark:text-white/40"
                 onClick={cancel}
               >
                 Отмена

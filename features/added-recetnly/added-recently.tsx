@@ -27,7 +27,7 @@ export function AddedRecently({
   return (
     <>
       <UpAnim>
-        <BaseCard>
+        <BaseCard className="dark:bg-[#484b4f]">
           <h1 className="text-text-primary mb-8">Недавно добавлены</h1>
           <Table
             onClick={handleClick}

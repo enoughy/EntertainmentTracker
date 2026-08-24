@@ -18,32 +18,38 @@ export default function () {
   const [ isDarkTheme, setIsDarkTheme ] = useState(false);
 
   function swapTheme(){
+    if(document.documentElement.classList.contains('dark')){
+      document.documentElement.classList.remove('dark');
+    }
+    else{
+      document.documentElement.classList.add('dark');
+    }
     setIsDarkTheme(!isDarkTheme);
   }
 
   return (
-    <div className="hidden shadow-[inset_-6px_0_6px_-6px_rgba(0,0,0,0.04)] bg-gradient-to-b from-[#f5f7f9]/60 to-[#eceef2]/60 backdrop-blur-2xl border border-black/[0.04] rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] lg:w-[332px] w-[200px] h-full md:flex flex-col shrink-0 px-4 py-6">
+    <div className="hidden shadow-[inset_-6px_0_6px_-6px_rgba(0,0,0,0.04)] bg-gradient-to-b from-[#f5f7f9]/60 to-[#eceef2]/60 backdrop-blur-2xl border border-black/[0.04] rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] lg:w-[332px] w-[200px] h-full md:flex flex-col shrink-0 px-4 py-6 dark:bg-[#1e2124] dark:bg-gradient-to-b dark:from-[#1e2124] dark:to-[#1e2124] dark:text-[rgba(255,255,255,0.8)]">
       <div className="flex items-center gap-3 px-3 mb-16">
         <div className="size-10 rounded-xl bg-white/60" />
         <div>
           <div className="text-[15px] font-semibold">Cinema</div>
-          <div className="text-[12px] text-zinc-500">Dashboard</div>
+          <div className="text-[12px] text-zinc-500 dark:text-zinc-200">Dashboard</div>
         </div>
       </div>
-      <h2 className="px-3 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500">
+      <h2 className="px-3 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500 dark:text-[rgb(255,255,255)]">
         Меню
       </h2>
       <Link
         href="/"
-        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors dark:text-[rgba(255,255,255,0.8)] dark:hover:bg-white/15 dark:hover:text-none"
       >
         <Chart />
-        <span>Статистика</span>
+        <span className="dark:text-[rgba(255,255,255,0.8)]">Статистика</span>
       </Link>
 
       <Link
         href="/Movie"
-        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors dark:text-[rgba(255,255,255,0.8)] dark:hover:bg-white/15 dark:hover:text-white/80"
       >
         <Film />
         <span>Фильмы</span>
@@ -51,7 +57,7 @@ export default function () {
 
       <Link
         href="/Series"
-        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors dark:text-[rgba(255,255,255,0.8)] dark:hover:bg-white/15 dark:hover:text-white/80"
       >
         <Series />
         <span>Сериалы</span>
@@ -59,20 +65,20 @@ export default function () {
 
       <Link
         href="/Anime"
-        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors dark:text-[rgba(255,255,255,0.8)] dark:hover:bg-white/15 dark:hover:text-white/80"
       >
         <Anime />
         <span>Аниме</span>
       </Link>
 
       <div className="h-px bg-black/5 my-4" />
-      <h2 className="px-3 mt-6 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500">
+      <h2 className="px-3 mt-6 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500 dark:text-[rgb(255,255,255)]">
         Другое
       </h2>
 
       <Link
         href="/Settings"
-        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors dark:text-[rgba(255,255,255,0.8)] dark:hover:bg-white/15 dark:hover:text-white/80"
       >
         <Settings />
         <span>Настройки</span>
@@ -80,13 +86,13 @@ export default function () {
 
       <Link
         href="/Help"
-        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors"
+        className="flex items-center gap-3 h-11 px-3 rounded-xl text-[15px] font-medium text-zinc-700 hover:bg-white/55 hover:text-zinc-900 transition-colors dark:text-[rgba(255,255,255,0.8)] dark:hover:bg-white/15 dark:hover:text-white/80"
       >
         <Help />
         <span>Контакты</span>
       </Link>
       <div className="flex mt-[50px] ml-[5px] text-[30px]">
-        {isDarkTheme ? <button className="cursor-pointer" onClick={swapTheme}><FiSun /></button> : <button className="cursor-pointer" onClick={swapTheme}><FaRegMoon /></button>} 
+        {isDarkTheme ? <button className="cursor-pointer text-gray" onClick={swapTheme}><FiSun /></button> : <button className="cursor-pointer" onClick={swapTheme}><FaRegMoon /></button>} 
       </div>
     </div>
   );
