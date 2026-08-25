@@ -6,6 +6,7 @@ import { describe, it, expect } from "vitest";
 import { beforeEach } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { STATUS_NAME } from "@/types/content-status/content-status-name";
+
 function handleDelete() {
   console.log("delete");
 }

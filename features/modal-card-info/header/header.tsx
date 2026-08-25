@@ -1,4 +1,4 @@
-import { Menu } from "@/component/menu/menu";
+import { Menu } from "@/components/menu/menu";
 import { Media } from "@/features/content/entity/media";
 
 export function Header({

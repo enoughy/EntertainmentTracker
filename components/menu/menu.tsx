@@ -45,7 +45,7 @@ export function Menu({ handlerDelete, handlerShow }: MenuProps) {
         <div
           hidden={isOpen ? false : true}
           className={
-            " absolute right-0 bottom-0 translate-x-[50%] translate-y-[100%] z-1000000"
+            "absolute right-0 bottom-0 translate-x-[50%] translate-y-[100%] z-1000000"
           }
         >
           <div className="bg-white rounded-2xl p-2 text-[12px]">
