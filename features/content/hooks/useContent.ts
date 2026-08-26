@@ -1,26 +1,14 @@
 import { useEffect, useState } from "react";
 import { ContentData } from "../entity/ContentData";
-import * as bd from "../bd/bd";
 import { contentDataInit, MediaBlockInit } from "@/features/contentItin";
 import * as service from "../services/contentService";
 import { Media } from "../entity/media";
-import { ContentType } from "@/types/content-type/contentType";
-import localforage from "localforage";
 import { MediaBlock } from "../entity/mediaBlock";
 import { storeMediaBlock } from "../bd/mediaBlockRepository";
 
-// const addMockMedias = (addMedia: any) => {
-//     medias.forEach(addMedia);
-// };
-//
 export function useContent() {
   const [content, setContent] = useState<ContentData | null>(contentDataInit());
   const [mediaBlocks, setMediaBlocks] = useState<MediaBlock[] | null>();
-
-  // const load = (): Promise<ContentData | null> => {
-  //   return bd.getContent();
-  // };
-
   /*if this funciton will use before init component => they may droped*/
   const addMedia = async (title: Media) => {
     if (content === null || content === undefined) {
@@ -33,14 +21,6 @@ export function useContent() {
     });
   };
 
-  // const getByType = (type: ContentType) => {
-  //   if (content === null || content === undefined) {
-  //     console.log("content is null || undef");
-  //     return;
-  //   }
-  //   service.getByType(type, content);
-  // };
-  //
   const getMediaBlocks = async () => {
     if (content === null || content === undefined) {
       console.log("content is null || undef");
@@ -48,15 +28,6 @@ export function useContent() {
     }
     return service.getMediaBlocks();
   };
-  //
-  // const getAddedRecently = () => {
-  //   if (content === null || content === undefined) {
-  //     console.log("content is null || undef");
-  //     return;
-  //   }
-  //   return service.getAddedRecently(content);
-  // };
-  //
   const deleteMedia = async (id: number) => {
     await service.deleteMedia(id);
 
@@ -101,7 +72,3 @@ export function useContent() {
     getMediaBlocks,
   };
 }
-
-const deleteMovie = () => {
-  return;
-};
