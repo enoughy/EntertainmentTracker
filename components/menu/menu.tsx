@@ -29,7 +29,9 @@ export function Menu({ handlerDelete, handlerShow }: MenuProps) {
   return (
     <>
       <div className="relative">
+        {/* Menu button*/}
         <div
+          data-testid="menu"
           ref={menuRef}
           className="hover:bg-white min-h-7 rounded-4xl transition-colors duration-100 flex items-center justify-center h-full"
           onClick={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,11 +41,11 @@ export function Menu({ handlerDelete, handlerShow }: MenuProps) {
         >
           <BsThreeDotsVertical className="text-text-gray-2 relative z-1"></BsThreeDotsVertical>
         </div>
-
+        {/* Menu Container */}
         <div
+          hidden={isOpen ? false : true}
           className={
-            (isOpen ? "" : "hidden") +
-            " absolute right-0 bottom-0 translate-x-[50%] translate-y-[100%] z-1000000"
+            "absolute right-0 bottom-0 translate-x-[50%] translate-y-[100%] z-1000000"
           }
         >
           <div className="bg-white rounded-2xl p-2 text-[12px]">

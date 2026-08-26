@@ -5,7 +5,6 @@ import { PageNaveItem } from "./page-nav-item";
 
 export function PageNav() {
   const pathName = usePathname();
-  console.log(pathName);
   return (
     <div className="flex items-center border-b-2 pl-3 py-2 text-text-main/15 text-[17px]">
       <Link

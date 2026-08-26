@@ -27,7 +27,7 @@ export function AddedRecently({
   return (
     <>
       <UpAnim>
-        <BaseCard>
+        <BaseCard data-testid="added-recently">
           <h1 className="text-text-primary mb-8">Недавно добавлены</h1>
           <Table
             onClick={handleClick}
@@ -42,6 +42,7 @@ export function AddedRecently({
         setIsOpenCard={setIsOpenCard}
         movie={selectMedia!}
         onUpdate={handleUpdate}
+        onDelete={handlerDelete}
       ></ModalMediaViewer>
     </>
   );
