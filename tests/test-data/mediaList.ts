@@ -59,4 +59,32 @@ export const testMediaList: Media[] = [
     tags: ["сны", "ограбление", "подсознание"],
     adictInf: [],
   },
+  {
+    id: 5,
+    name: "Начало 2",
+    genres: ["Фантастика", "Боевик", "Триллер"],
+    rate: 8,
+    contentType: "film" as ContentType,
+    contentStatus: "planning" as ContentStatus,
+    dateOfAdd: new Date("2026-02-11"),
+    dateOfMedia: new Date("2010-07-16"),
+    discription:
+      "Профессиональный вор проникает в сны людей, но получает задание внедрить идею в подсознание.",
+    tags: ["сны", "ограбление", "подсознание"],
+    adictInf: [],
+  },
+  {
+    id: 6,
+    name: "Начало 4",
+    genres: ["Фантастика", "Боевик", "Триллер"],
+    rate: 8,
+    contentType: "film" as ContentType,
+    contentStatus: "planning" as ContentStatus,
+    dateOfAdd: new Date("2026-02-11"),
+    dateOfMedia: new Date("2010-07-16"),
+    discription:
+      "Профессиональный вор проникает в сны людей, но получает задание внедрить идею в подсознание.",
+    tags: ["сны", "ограбление", "подсознание"],
+    adictInf: [],
+  },
 ];

@@ -1,14 +1,3 @@
-// import { ContentData } from "../entity/ContentData";
-// import localforage from "localforage";
-//
-// export function getContent(): Promise<ContentData | null> {
-//   return localforage.getItem<ContentData>("content");
-// }
-//
-// export function storeContent(content: ContentData) {
-//   localforage.setItem("content", content);
-// }
-
 import Dexie, { Table } from "dexie";
 import { Media } from "../entity/media";
 import { MediaBlockRecord } from "../entity/mediaBlock";

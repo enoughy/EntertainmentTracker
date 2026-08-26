@@ -19,6 +19,9 @@ export function useContent() {
     service.getMediaBlocks().then((mbList) => {
       setMediaBlocks(mbList);
     });
+    service.getContent().then((content) => {
+      setContent(content!);
+    });
   };
 
   const getMediaBlocks = async () => {
