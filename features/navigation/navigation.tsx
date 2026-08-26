@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Film from "@/components/icons/film";
 import Chart from "@/components//icons/chart";
@@ -9,20 +9,16 @@ import Link from "next/link";
 import Help from "@/components/icons/help";
 import { FiSun } from "react-icons/fi";
 import { FaRegMoon } from "react-icons/fa";
-import { useState } from 'react';
-
-
+import { useState } from "react";
 
 export default function () {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const [ isDarkTheme, setIsDarkTheme ] = useState(false);
-
-  function swapTheme(){
-    if(document.documentElement.classList.contains('dark')){
-      document.documentElement.classList.remove('dark');
-    }
-    else{
-      document.documentElement.classList.add('dark');
+  function swapTheme() {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
     }
     setIsDarkTheme(!isDarkTheme);
   }
@@ -33,7 +29,9 @@ export default function () {
         <div className="size-10 rounded-xl bg-white/60" />
         <div>
           <div className="text-[15px] font-semibold">Cinema</div>
-          <div className="text-[12px] text-zinc-500 dark:text-zinc-200">Dashboard</div>
+          <div className="text-[12px] text-zinc-500 dark:text-zinc-200">
+            Dashboard
+          </div>
         </div>
       </div>
       <h2 className="px-3 mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-zinc-500 dark:text-[rgb(255,255,255)]">
@@ -92,7 +90,15 @@ export default function () {
         <span>Контакты</span>
       </Link>
       <div className="flex mt-[50px] ml-[5px] text-[30px]">
-        {isDarkTheme ? <button className="cursor-pointer text-gray" onClick={swapTheme}><FiSun /></button> : <button className="cursor-pointer" onClick={swapTheme}><FaRegMoon /></button>} 
+        {isDarkTheme ? (
+          <button className="cursor-pointer text-gray" onClick={swapTheme}>
+            <FiSun />
+          </button>
+        ) : (
+          <button className="cursor-pointer" onClick={swapTheme}>
+            <FaRegMoon />
+          </button>
+        )}
       </div>
     </div>
   );
