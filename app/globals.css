@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fcfbfc;
   /* #f4f5fa; */
 
   --foreground: #171717;
+}
+.dark {
+    --background: #282b30;
 }
 
 @theme inline {
@@ -132,9 +137,6 @@ body {
   transition: 0.3s ease;
   padding: 2px;
 }
-.closeBtn:hover {
-  background: rgb(231, 231, 231);
-}
 .inputContainer > input {
   margin-bottom: 20px;
   /* border: 1px solid black; */
@@ -236,4 +238,7 @@ main {
     transform: translateY(0);
     backdrop-filter: blur(0px);
   }
+}
+* {
+  @apply transition-colors duration-300;
 }

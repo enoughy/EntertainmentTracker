@@ -11,10 +11,10 @@ type BarChartProps = {
 export function BarChartComp({ data }: BarChartProps) {
   return (
     <UpAnim className="h-full">
-      <BaseCard className="w-full second:max-w-[326px] h-full pt-8 pb-2">
+      <BaseCard className="w-full second:max-w-[326px] h-full pt-8 pb-2 dark:bg-[#484b4f]">
         <div className="flex justify-between items-center">
-          <h4 className="text-[#29292C] text-[20px]">Добавлено</h4>
-          <span className="text-[#898989] text-[17px]">
+          <h4 className="text-[#29292C] text-[20px] dark:text-[rgba(255,255,255,0.8)]">Добавлено</h4>
+          <span className="text-[#898989] text-[17px] dark:text-[rgba(255,255,255,0.6)]">
             {data.at(-1) == null
               ? ""
               : data[0].mount + " - " + data.at(-1)!.mount}

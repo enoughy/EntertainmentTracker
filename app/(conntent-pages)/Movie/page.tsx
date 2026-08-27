@@ -52,12 +52,12 @@ export default function Movie() {
   return (
     <>
       <div className="flex justify-center items-center mb-[50px] mt-[30px] pageInfo">
-        <h2 className="mr-[30px]">Мои фильмы</h2>
+        <h2 className="mr-[30px] dark:text-white/90">Мои фильмы</h2>
         <button
           onClick={() => setIsOpen(true)}
-          className="flex button justify-between"
+          className="flex button justify-between cursor-pointer dark:bg-[#575c61] dark:text-white dark:border dark:border-black/40"
         >
-          <Plus />
+          +
           Добавить
         </button>
       </div>
@@ -80,7 +80,7 @@ export default function Movie() {
       <div className="">
         <div className="gap-[20px] grid grid-cols-5 p-4">
           {movies.length === 0 ? (
-            <p className="noneText">Фильмов пока нет</p>
+            <p className="noneText dark:text-white/40">Фильмов пока нет</p>
           ) : (
             movies.map((movie, index) => (
               <MediaCard

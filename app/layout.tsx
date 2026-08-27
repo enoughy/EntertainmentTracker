@@ -42,7 +42,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex justify-center items-center">
         <div
-          className="z-0 absolute inset-0 bg-cover bg-center bg-fixed opacity-100 blur-xs"
+          className="z-0 absolute inset-0 bg-cover bg-center bg-fixed opacity-100 blur-xs dark:opacity-30"
           style={{
             backgroundImage: `url(${backgroundImage.src})`,
           }}

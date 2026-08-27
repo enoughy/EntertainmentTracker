@@ -96,12 +96,12 @@ export function ModalMediaEditor({
 
   return (
     <Modal isOpen={isOpen}>
-      <div className="flex justify-end">
+      <div className="flex justify-end dark:text-white/80">
         <button
           onClick={() => {
             setIsOpen(false);
           }}
-          className="cursor-pointer closeBtn"
+          className="cursor-pointer bg-[rgb(231, 231, 231)] closeBtn dark:hover:bg-white/10"
         >
           <X />
         </button>
@@ -110,13 +110,13 @@ export function ModalMediaEditor({
         <div className="grid grid-cols-2 gap-x-7">
           {/* Drop Container */}
           <div
-            className="relative w-full aspect-[2/3] overflow-hidden rounded-lg border-3 border-dashed bg-gray-100 h-[600px] border-gray-300"
+            className="relative w-full aspect-[2/3] overflow-hidden rounded-lg border-3 border-dashed bg-gray-100 h-[600px] border-gray-300 dark:bg-[#494d53] dark:border-gray-400"
             {...getRootProps()}
           >
             <input className="h-full" {...getInputProps()} />
             {coverImgPath == null ? (
               <div>
-                <p className="flex items-center flex-col-reverse absolute w-full p-3 text-center top-[45%] left-[50%] translate-[-50%] text-gray-700">
+                <p className="flex items-center flex-col-reverse absolute w-full p-3 text-center top-[45%] left-[50%] translate-[-50%] text-gray-700 dark:text-white/50">
                   <Download></Download>
                   Перетащите файл сюда или нажмите для выбора
                 </p>
@@ -138,7 +138,7 @@ export function ModalMediaEditor({
             )}
           </div>
 
-          <div className="overflow-scroll">
+          <div className="overflow-scroll dark:text-white/80 dark:overflow-hidden">
             <label>Название: </label>
             <input
               {...register("title", { required: "Введите название" })}
@@ -239,7 +239,7 @@ export function ModalMediaEditor({
             ))}
             <button
               onClick={() => setAdInfCount(adInfCount + 1)}
-              className="button"
+              className="button dark:bg-[#575c61] dark:text-white/80 dark:border-black/40 cursor-pointer"
             >
               +
             </button>
@@ -250,7 +250,7 @@ export function ModalMediaEditor({
           <button
             // className="cursor-pointer bg-[lightgray] p-[7px] rounded-[10px] border 2border-[gray] addBtn"
             type="submit"
-            className="mt-5 button"
+            className="mt-5 button cursor-pointer dark:bg-[#575c61] dark:text-white/80 dark:border-black/40"
           >
             Добавить
           </button>

@@ -24,24 +24,24 @@ export function BaseStatCard({
   return (
     <BaseCard
       className={
-        "flex w-full mb-2 first:mb-0 second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between " +
+        "flex w-full mb-2 first:mb-0 second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between dark:bg-[#484b4f]" +
         className
       }
     >
       <div>
-        <div className="text-[#898989]  text-[17px]">{name}</div>
+        <div className="text-[#898989]  text-[17px] dark:text-white">{name}</div>
         {/* All count in topic text*/}
-        <div className="text-[28px] font-semibold leading-none mt-1.5 text-text-main">
+        <div className="text-[28px] font-semibold leading-none mt-1.5 text-text-main dark:text-[rgba(255,255,255,0.7)]">
           {countAll}
         </div>
 
         {/* count that change of time*/}
-        <div className="text-[14px] text-text-main">
+        <div className="text-[14px] text-text-main dark:text-[rgba(255,255,255,0.6)]">
           {"+" + countChange + " за месяц"}
         </div>
 
         {/* procent that change of time*/}
-        <div className="text-[#898989] text-[14px] text-center relative">
+        <div className="text-[#898989] text-[14px] text-center relative dark:text-[rgba(255,255,255,0.4)]">
           {proc >= 0 ? (
             <ArrowUp className="mb-0.5 mr-0.5"></ArrowUp>
           ) : (

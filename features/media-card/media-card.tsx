@@ -41,12 +41,12 @@ export function MediaCard({ title, onClick }: MediaCardProps) {
       </div>
       <div className="rounded-2xl text-card-text w-full text-[17px] font-medium">
         <div className="flex justify-between text-text-gray items-center">
-          <p className="">{STATUS_NAME[title.contentStatus]}</p>
-          <p className="text-[12px] text-text-main">
+          <p className="dark:text-white/70">{STATUS_NAME[title.contentStatus]}</p>
+          <p className="text-[12px] text-text-main dark:text-white/70">
             {title.dateOfAdd.toLocaleDateString("ru-RU", options)}
           </p>
         </div>
-        {title.name}
+        <p className="dark:text-white/90">{title.name}</p>
       </div>
     </div>
   );
