@@ -125,9 +125,9 @@ export async function changeMedia(id: number, newTitle: Media) {
     console.log("store media block");
     mediaBlockRepository.storeMediaBlock(mb!);
   }
-  title = { id: title.id, ...newTitle };
+  title = { ...newTitle, id: title.id };
   console.log(title);
-  mediaRepository.addMedia(title);
+  await mediaRepository.addMedia(title);
 }
 
 export async function getMediaBlocks(): Promise<MediaBlock[] | undefined> {

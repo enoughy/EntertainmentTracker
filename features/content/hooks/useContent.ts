@@ -43,8 +43,7 @@ export function useContent() {
   };
 
   const changeMedia = async (id: number, title: Media) => {
-    console.log("change media ()");
-    console.log(title);
+    console.log("change media");
     await service.changeMedia(id, title);
     service.getMediaBlocks().then((mbList) => {
       setMediaBlocks(mbList);
