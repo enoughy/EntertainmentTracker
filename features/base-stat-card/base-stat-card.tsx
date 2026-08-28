@@ -24,12 +24,14 @@ export function BaseStatCard({
   return (
     <BaseCard
       className={
-        "flex w-full mb-2 first:mb-0 second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between dark:bg-[#484b4f]" +
+        "flex w-full mb-2 first:mb-0 second:w-80.5 h-37.5 mr-3 pt-[38px] justify-between " +
         className
       }
     >
       <div>
-        <div className="text-[#898989]  text-[17px] dark:text-white">{name}</div>
+        <div className="text-[#898989]  text-[17px] dark:text-white">
+          {name}
+        </div>
         {/* All count in topic text*/}
         <div className="text-[28px] font-semibold leading-none mt-1.5 text-text-main dark:text-[rgba(255,255,255,0.7)]">
           {countAll}

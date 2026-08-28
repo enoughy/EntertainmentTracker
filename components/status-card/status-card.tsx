@@ -11,7 +11,7 @@ export function StatusCard({ status }: StatusCardProps) {
   return (
     <div className="inline-flex">
       <StatusCardAnim>
-        <div className="bg-white rounded-3xl">
+        <div className="bg-white dark:bg-[#383B40] rounded-3xl">
           <div
             style={{ "--card-color": cardColor } as React.CSSProperties}
             className={`inline-flex justify-between items-center rounded-3xl py-1 px-3 bg-[var(--card-color)]/10 hover:bg-[var(--card-color)]/20 transition-colors duration-150 max-w-55`}

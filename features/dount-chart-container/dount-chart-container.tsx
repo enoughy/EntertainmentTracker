@@ -11,7 +11,7 @@ export function DountChartContainer({ data }: DountChartContainerProps) {
   return (
     <div className="w-full second:max-w-[656px]">
       <UpAnim>
-        <Header className="mb-5 dark:bg-[#484b4f]"></Header>
+        <Header className="mb-5"></Header>
       </UpAnim>
       <div className="grid grid-cols-1 sm:grid-cols-3 items-center justify-between">
         <DountChart name="Аниме" stat={data[0]}></DountChart>

@@ -11,7 +11,7 @@ type DountChartProps = {
 export function DountChart({ stat, name }: DountChartProps) {
   return (
     <SpringAnime>
-      <BaseCard className="w-full min-w-[200px] mr-2 second:w-[207px] h-[228px] rounded-[55px] pt-7 dark:bg-[#484b4f] dark:text-[rgba(255,255,255,0.5)]">
+      <BaseCard className="w-full min-w-[200px] mr-2 second:w-[207px] h-[228px] rounded-[55px] pt-7  dark:text-[rgba(255,255,255,0.5)]">
         <h4 className="text-center text-[#222F3E] text-[26px] font-extrabold mb-2 dark:text-[rgba(255,255,255,0.7)]">
           {name}
         </h4>
