@@ -1,5 +1,4 @@
 "use client";
-
 import Film from "@/components/icons/film";
 import Chart from "@/components//icons/chart";
 import Series from "@/components/icons/series";
@@ -7,22 +6,8 @@ import Anime from "@/components/icons/clapperboard";
 import Settings from "@/components/icons/settings";
 import Link from "next/link";
 import Help from "@/components/icons/help";
-import { FiSun } from "react-icons/fi";
-import { FaRegMoon } from "react-icons/fa";
-import { useState } from "react";
 
 export default function () {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  function swapTheme() {
-    if (document.documentElement.classList.contains("dark")) {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-    setIsDarkTheme(!isDarkTheme);
-  }
-
   return (
     <div className="hidden shadow-[inset_-6px_0_6px_-6px_rgba(0,0,0,0.04)] bg-gradient-to-b from-[#f5f7f9]/60 to-[#eceef2]/60 backdrop-blur-2xl border border-black/[0.04] rounded-l-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] lg:w-[332px] w-[200px] h-full md:flex flex-col shrink-0 px-4 py-6 dark:bg-gradient-to-b dark:from-[#1e2124]/70 dark:to-[#2A2E33]/70 dark:text-[rgba(255,255,255,0.8)]">
       <div className="flex items-center gap-3 px-3 mb-16">
@@ -89,17 +74,6 @@ export default function () {
         <Help />
         <span>Контакты</span>
       </Link>
-      <div className="flex mt-[50px] ml-[5px] text-[30px]">
-        {isDarkTheme ? (
-          <button className="cursor-pointer text-gray" onClick={swapTheme}>
-            <FiSun />
-          </button>
-        ) : (
-          <button className="cursor-pointer" onClick={swapTheme}>
-            <FaRegMoon />
-          </button>
-        )}
-      </div>
     </div>
   );
 }
