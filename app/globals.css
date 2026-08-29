@@ -9,7 +9,7 @@
   --foreground: #171717;
 }
 .dark {
-    --background: #282b30;
+  --background: #282b30;
 }
 
 @theme inline {
@@ -39,13 +39,6 @@
   /* --color-card-text: #fff; */
   --color-card-bg: #fff;
   --color-card-text: #29292c;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 @layer components {
